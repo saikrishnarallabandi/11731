@@ -1,0 +1,17 @@
+
+
+26 Jan 2017:
+
+I think I will try to remove the singletons. As of now, I dont see any issue with the script but my numbers are pretty low (7.6) which is bad.
+  
+Removing singletons improves it to 8.54. Something is definitely wrong.
+
+I see that I am including stop symbols in calculations. I think it is due to bad coding of while b < len(line) -1: Correcting this by adding line to eliminate if last is stop symbol improved it to 9.36512599379. Still something is off.
+
+Dividing the MLE by the sentence length  made  it to 65.5218558921
+
+
+10 Feb 2017:
+
+I rewrote this as a class. The sentence level perplexity seems to be making sense. I will try getting the corpus stats.
+I think I am messing the denominator up.

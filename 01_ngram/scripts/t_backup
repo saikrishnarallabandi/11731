@@ -1,0 +1,24 @@
+wids = defaultdict(lambda: len(widsa))
+
+wid = wids[word]
+
+2. feature_function(context):
+  features = []
+  # Calc f1
+  features.append(calculate_f1(context))
+  features.append(calculate_f2(context))
+
+  return features
+
+def sparse_feats_to_dense_feats(features):
+  ret = np.zeros(num_feats)
+  for f in features:
+      ret[f] += 1
+  return ret
+
+
+list_feature_vectors = [np.zzeros(vocab_size)) ]
+
+3. Loss function(x, next_word):
+    # Eq 25 through 28
+   
