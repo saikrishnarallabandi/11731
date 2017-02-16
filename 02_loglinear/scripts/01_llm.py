@@ -60,3 +60,15 @@ def run_training():
       for dev_example in development_data:
         dev_loss += calculate_loss(dev_example)
       print("Training_loss=%f, dev loss=%f" % (train_loss, dev_loss))
+      
+      
+'''
+NGRAM
+LOGLINEAR  DYNET
+FEEDFORWARD DYNET
+RECURRENT    DYNET
+ENCODERDECODER DYNET
+ATTENTION   DYNET 
+BLIZZARD
+
+'''
