@@ -52,7 +52,7 @@ class loglinearlm:
      def calculate_feature_F1(self, file):
         # This is a trigram context feature
         features = []
-        #feature_vector = np.zeros(self.get_vocab_size())
+        feature_vector_prime = np.zeros(self.get_vocab_size())
         g = open(file)
         for line in g:
 	  line = '<s> ' + line.split('\n')[0] + ' </s>'
@@ -60,7 +60,7 @@ class loglinearlm:
 	  line = line.split()
 	  contexts = zip(line[0:len(line)-2], line[1:len(line)-1], line[2:])
 	  for prev_2, prev_1, current in contexts:
-	    feature_vector = np.zeros(self.get_vocab_size())
+	    feature_vector = feature_vector_prime
 	    #print prev_2, prev_1, current, self.get_vocab_size()
 	    #print prev_2, self.wids[prev_2], feature_vector
 	    prev_2_id = self.wids[prev_2]
@@ -76,7 +76,9 @@ class loglinearlm:
         
      def sparse_features_to_dense_features(self, features):
         ret = np.zeros(len(features))
+        print ret
         for f in features:
+             print f
              ret[f] += 1
         return ret
 
