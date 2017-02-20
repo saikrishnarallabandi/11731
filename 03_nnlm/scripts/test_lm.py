@@ -50,7 +50,7 @@ for epoch in range(10):
   #sent_count += len(sents)
   
   loss.backward()
-  trainer.update(learning_rate)
+  trainer.update(0.1)
   sample_num += len(sents)
   trainer.update_epoch(1)
   print_flag = 1
