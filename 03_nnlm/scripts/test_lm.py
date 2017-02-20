@@ -51,7 +51,7 @@ for epoch in range(10):
   
   loss.backward()
   trainer.update(0.1)
-  sample_num += len(sents)
+  sample_num += len(data)
   trainer.update_epoch(1)
   print_flag = 1
   print "Epoch 0"
