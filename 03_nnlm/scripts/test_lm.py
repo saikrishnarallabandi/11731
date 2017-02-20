@@ -45,9 +45,9 @@ for epoch in range(10):
   print gen_losses
   loss = dy.sum_batches(losses)
   cum_loss += loss.value()
-  cum_perplexity += sum([math.exp(gen_loss)] for gen_loss in gen_losses)
+  cum_perplexity += math.exp(gen_losses)
   token_count += len(data)
-  sent_count += len(sents)
+  #sent_count += len(sents)
   
   loss.backward()
   trainer.update(learning_rate)
