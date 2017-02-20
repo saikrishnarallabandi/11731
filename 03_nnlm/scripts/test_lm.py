@@ -31,18 +31,18 @@ print_flag = 0
 print time.time()
   
 # Training
-for epoch in range(10):
+for epoch in range(10000):
   random.shuffle(data)
   if print_flag == 1:
-    print epoch, sample_num, " " , trainer.status()
-    print "L: ", cum_loss / token_count
-    print "P: ", math.exp(cum_loss / token_count)
-    print "T: ", ( time.time() - _start)
+    print epoch, sample_num, " " , trainer.status(), 
+    print "L: ", cum_loss / token_count,
+    print "P: ", math.exp(cum_loss / token_count),
+    print "T: ", ( time.time() - _start),
   _start = time.time()
   losses = lm.build_nnlm_graph(data)
-  print _start
+  #print _start
   gen_losses = losses.vec_value()
-  print gen_losses
+  #print gen_losses
   loss = dy.sum_batches(losses)
   cum_loss += loss.value()
   cum_perplexity += math.exp(gen_losses[0]/ len(data))
