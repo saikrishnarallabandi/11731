@@ -3,6 +3,7 @@ import cPickle, pickle
 import numpy as np
 import os
 from collections import defaultdict
+import dynet as dy
 
 class nnlm:
          
@@ -10,6 +11,15 @@ class nnlm:
          self.feats_and_values ={}
          self.wids = defaultdict(lambda: len(self.wids))
          self.unigrams = {}
+         model = dy.Model()
+         self.EMB_SIZE = 128
+         self.HID_SIZE  = 128
+         self.N = 3
+         self.M = model.add_lookup_parameters((len(self.wids), self.EMB_SIZE))
+         self.W_mh = model.add_parameters((self.HID_SIZE, self.EMB_SIZE * (self.N-1)))
+         self.b_hh = model.add_parameters((self.HID_SIZE))
+         self.W_hs = model.add_parameters((len(self.wids), self.HID_SIZE))
+         self.b_s = model.add_parameters((len(self.wids)))
 
      def read_corpus(self, file):
        print file
@@ -42,6 +52,27 @@ class nnlm:
        
      def create_data(self, file):
          self.accumulate_trigramfeatures(file)
+         
+     def build_nnlm_graph(self, dictionary):
+         dy.renew_cg()
+         errs = []
+         for context, next_word in dictionary:
+	    print context, next_word
+            w_xh = dy.parameter(self.W_mh)
+            b_h = dy.parameter(self.b_hh)
+            W_hy = dy.parameter(self.W_hs)
+            b_y = dy.parameter(self.b_s)
+            print "Here"
+            x = M[wids[context.split()[0]]].value() + M[wids[context.split()[1]]].value()
+            print x
+            h_val = dy.tanh(w_xh * dy.inputVector(x) + b_h)
+            y_val = W_hy * h_val + b_y
+            err = dy.pickneglogsoftmax(y_val,self.wids[next_word])
+            errs.append(err)
+         gen_err = dy.esum(errs)    
+         return gen_err
+         
+
          
      def accumulate_trigramfeatures(self, file):
         self.trigramfeaturedict = {}
