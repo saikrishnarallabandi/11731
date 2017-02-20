@@ -42,6 +42,7 @@ for epoch in range(10):
   losses = lm.build_nnlm_graph(data)
   print _start
   gen_losses = losses.vec_value()
+  print gen_losses
   loss = dy.sum_batches(losses)
   cum_loss += loss.value()
   cum_perplexity += sum([math.exp(gen_loss)] for gen_loss in gen_losses)
