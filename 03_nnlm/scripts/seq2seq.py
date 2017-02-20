@@ -11,15 +11,15 @@ class nnlm:
          self.feats_and_values ={}
          self.wids = defaultdict(lambda: len(self.wids))
          self.unigrams = {}
-         model = dy.Model()
+         self.model = dy.Model()
          self.EMB_SIZE = 128
          self.HID_SIZE  = 128
          self.N = 3
-         self.M = model.add_lookup_parameters((len(self.wids), self.EMB_SIZE))
-         self.W_mh = model.add_parameters((self.HID_SIZE, self.EMB_SIZE * (self.N-1)))
-         self.b_hh = model.add_parameters((self.HID_SIZE))
-         self.W_hs = model.add_parameters((len(self.wids), self.HID_SIZE))
-         self.b_s = model.add_parameters((len(self.wids)))
+         M = self.model.add_lookup_parameters((len(self.wids), self.EMB_SIZE))
+         W_mh = self.model.add_parameters((self.HID_SIZE, self.EMB_SIZE * (self.N-1)))
+         b_hh = self.model.add_parameters((self.HID_SIZE))
+         W_hs = self.model.add_parameters((len(self.wids), self.HID_SIZE))
+         b_s = self.model.add_parameters((len(self.wids)))
 
      def read_corpus(self, file):
        print file
@@ -55,16 +55,25 @@ class nnlm:
          
      def build_nnlm_graph(self, dictionary):
          dy.renew_cg()
+         M = self.model.add_lookup_parameters((len(self.wids), self.EMB_SIZE))
+         W_mh = self.model.add_parameters((self.HID_SIZE, self.EMB_SIZE * (self.N-1)))
+         b_hh = self.model.add_parameters((self.HID_SIZE))
+         W_hs = self.model.add_parameters((len(self.wids), self.HID_SIZE))
+         b_s = self.model.add_parameters((len(self.wids)))
+
+         w_xh = dy.parameter(W_mh)
+         b_h = dy.parameter(b_hh)
+         W_hy = dy.parameter(W_hs)
+         b_y = dy.parameter(b_s)
          errs = []
          for context, next_word in dictionary:
-	    print context, next_word
-            w_xh = dy.parameter(self.W_mh)
-            b_h = dy.parameter(self.b_hh)
-            W_hy = dy.parameter(self.W_hs)
-            b_y = dy.parameter(self.b_s)
-            print "Here"
-            x = M[wids[context.split()[0]]].value() + M[wids[context.split()[1]]].value()
-            print x
+	    #print context, next_word
+            k =  M[self.wids[context.split()[0]]]
+            kk =  M[self.wids[context.split()[1]]]
+            #print k , kk
+            #print k.value()
+            x = k.value() + kk.value()
+            #print x
             h_val = dy.tanh(w_xh * dy.inputVector(x) + b_h)
             y_val = W_hy * h_val + b_y
             err = dy.pickneglogsoftmax(y_val,self.wids[next_word])
