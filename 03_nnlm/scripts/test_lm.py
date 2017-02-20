@@ -45,7 +45,7 @@ for epoch in range(10):
   print gen_losses
   loss = dy.sum_batches(losses)
   cum_loss += loss.value()
-  cum_perplexity += math.exp(gen_losses)
+  cum_perplexity += math.exp(gen_losses[0])
   token_count += len(data)
   #sent_count += len(sents)
   
