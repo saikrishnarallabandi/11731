@@ -44,8 +44,8 @@ for epoch in range(10):
   gen_losses = losses.vec_value()
   loss = dy.sum_batches(losses)
   cum_loss += loss.value()
-  cum_perplexity += sum([math.exp(gen_loss / words_predicted(sent)) for gen_loss, sent in zip(gen_losses, sents)])
-  token_count += sum([words_predicted(sent) for sent in sents])
+  cum_perplexity += sum([math.exp(gen_loss)) for gen_loss, sent in zip(gen_losses, sents)])
+  token_count += len(data)
   sent_count += len(sents)
   
   loss.backward()
