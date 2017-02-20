@@ -41,7 +41,7 @@ for epoch in range(10):
   _start = time.time()
   losses = lm.build_nnlm_graph(data)
   print _start
-  gen_loss = losses.vec_value()
+  gen_losses = losses.vec_value()
   loss = dy.sum_batches(losses)
   cum_loss += loss.value()
   cum_perplexity += sum([math.exp(gen_loss / words_predicted(sent)) for gen_loss, sent in zip(gen_losses, sents)])
