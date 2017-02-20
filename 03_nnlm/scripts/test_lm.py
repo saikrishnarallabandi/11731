@@ -37,7 +37,7 @@ for epoch in range(10000):
     print epoch, sample_num, " " , trainer.status(), 
     print "L: ", cum_loss / token_count,
     print "P: ", math.exp(cum_loss / token_count),
-    print "T: ", ( time.time() - _start),
+    print "T: ", ( time.time() - _start)
   _start = time.time()
   losses = lm.build_nnlm_graph(data)
   #print _start
@@ -54,7 +54,7 @@ for epoch in range(10000):
   sample_num += len(data)
   trainer.update_epoch(1)
   print_flag = 1
-  print "Epoch 0"
+  #print "Epoch 0"
   
 
 '''
