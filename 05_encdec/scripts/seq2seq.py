@@ -10,38 +10,64 @@ class EncoderDecoder:
    
      def __init__(self, vocab_size):
        self.model = dy.Model()
-       self.trainer = dy.SimpleSGDTrainer(model)
+       self.trainer = dy.SimpleSGDTrainer(self.model)
        self.layers = 1
        self.embed_size = 128
        self.hidden_size = 128
        self.src_vocab_size = vocab_size
        self.tgt_vocab_size = vocab_size
        
-       self.enc_builder = LSTMBbuilder(self.layers, self.embed_size, self.hidden_size, model) 
-       self.dec_builder = LSTMBbuilder(self.layers, self.embed_size, self.hidden_size, model) 
-       self.src_lookup = model.add_lookup_parameters((self.src_vocab_size, self.embed_size))
-       self.tgt_lookup = model.add_lookup_parameters((self.tgt_vocab_size, self.embed_size))
-       self.W_y = model.add_parameters((self.tgt_vocab_size, self.hidden_size))
-       self.b_y = model.add_parameters((self.tgt_vocab_size))
+       self.enc_builder = dy.LSTMBuilder(self.layers, self.embed_size, self.hidden_size, self.model) 
+       self.dec_builder = dy.LSTMBuilder(self.layers, self.embed_size, self.hidden_size, self.model) 
+       self.src_lookup = self.model.add_lookup_parameters((self.src_vocab_size, self.embed_size))
+       self.tgt_lookup = self.model.add_lookup_parameters((self.tgt_vocab_size, self.embed_size))
+       self.W_y = self.model.add_parameters((self.tgt_vocab_size, self.hidden_size))
+       self.b_y = self.model.add_parameters((self.tgt_vocab_size))
        
-     def __step(self, instance):
+     def encode(self, instance, wids):
         dy.renew_cg()
         W_y = dy.parameter(self.W_y)
         b_y = dy.parameter(self.b_y)
         
-        src_sent = instance
+        src_sent = instance.split()
+        #print src_sent
         losses = []
         total_words = 0
       
         # Encoder
         enc_state = self.enc_builder.initial_state()
         for current_word in src_sent:
-	     state = enc_state.add_input(self.src_lookup[self.wids[current_word]])
+	     #print current_word
+	     state = enc_state.add_input(self.src_lookup[wids[current_word]])
+	     #print state.output().value()
 	encoded = state.output()
-	
-	# Set initial decoder state to the result of the encoder
-	dec_state = self.dec_builder.initial_state([encoded])
+	#print len(encoded.value())
+	#return encoded, 1
         
+        #print "Encoding done"
+        
+	# Set initial decoder state to the result of the encoder
+	dec_state = self.dec_builder.initial_state()
+	dec_state = self.dec_builder.initial_state(encoded)
+	#dec_state = [encoded]
+	#print "Set the decoder state"
+	errs = []
+	# Calculate losses for decoding
+	for (cw, nw) in zip(src_sent, src_sent[1:]):
+	  #print cw, nw
+	  dec_state = dec_state.add_input(self.tgt_lookup[wids[current_word]])
+	  #print "Initialized Decoder State"
+	  # calculate ystar
+	  ystar = (W_y * dec_state.output()) + b_y
+	  #print "Calculated ystar"
+	  # Calculate loss
+          loss = dy.pickneglogsoftmax(ystar, wids[nw])
+          losses.append(loss)
+          total_words += 1
+          
+        return dy.esum(losses), total_words  
+         
+          
 class nnlm:
          
      def __init__(self):         
@@ -485,3 +511,4 @@ class ngramlm:
  
   	              
                
+
