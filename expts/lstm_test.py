@@ -11,17 +11,17 @@ gen_bias = model.add_parameters((2,))
 trainer = dy.SimpleSGDTrainer(model)
 
 def enc(num, dim):
- if num % 2 == 1:
-   dy.renew_cg()
+ #if num % 2 == 1:
+ dy.renew_cg()
    # ENC -> layer, inp_dim, hid_dim
-   gen_R = model.add_parameters((2, dim))
-   encoder = dy.LSTMBuilder(1,2,dim, model)
+ gen_R = model.add_parameters((2, dim))
+ encoder = dy.LSTMBuilder(1,2,dim, model)
 
- else:
-   dy.renew_cg()
-   # ENC -> layer, inp_dim, hid_dim
-   encoder = dy.LSTMBuilder(1,2,3, model)
-   gen_R = model.add_parameters((2, dim)) 
+ #else:
+ #  dy.renew_cg()
+ #  # ENC -> layer, inp_dim, hid_dim
+ #  encoder = dy.LSTMBuilder(1,2,3, model)
+ #  gen_R = model.add_parameters((2, dim)) 
  encoder_state = encoder.initial_state()
  state = encoder_state.add_input(M[num])
  y_t = state.output()
@@ -29,20 +29,20 @@ def enc(num, dim):
  bias = dy.parameter(gen_bias)
  r_t = bias + (R * y_t)
  err = dy.pickneglogsoftmax(r_t, num)
- print trainer.status()
+ #print trainer.status()
  #err.backward()
  #trainer.update(0.01)
  return y_t, r_t, err
 
 for k in range(10):
  print "   Epoch: ", k
- for v in range(0,10):
+ for v in range(0,10000):
     state, output, err = enc(v, 3)
-    print "Error Value: ", err.value()
+    #print "Error Value: ", err.value()
     err.backward()
-    trainer.update(0.1)
-    #if v % 500 == 1:
-    print v, err.value() #M[v].value(), state.value(), output.value(), err.value()
+    #trainer.update(1)
+    #if v % 5000 == 1:
+    #   print v, err.value() #M[v].value(), state.value(), output.value(), err.value()
     #print '\n'
     #while err.value() > 0.8:
     #   state, output, err = enc(v, 10)

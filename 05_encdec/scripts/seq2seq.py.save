@@ -1,4 +1,4 @@
-#from seq2seq import ngramlm, neurallm
+	#from seq2seq import ngramlm, neurallm
 import cPickle, pickle
 import numpy as np
 import os
@@ -65,7 +65,7 @@ class EncoderDecoder:
           losses.append(loss)
           total_words += 1
           
-        return dy.esum(losses), total_words, ystar  
+        return dy.esum(losses), total_words  
          
           
 class nnlm:

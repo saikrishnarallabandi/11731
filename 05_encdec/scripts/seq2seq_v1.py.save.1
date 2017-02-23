@@ -4,6 +4,7 @@ import numpy as np
 import os
 from collections import defaultdict
 import dynet as dy
+import numpy
 
 
 class EncoderDecoder:
@@ -12,8 +13,8 @@ class EncoderDecoder:
        self.model = dy.Model()
        self.trainer = dy.SimpleSGDTrainer(self.model)
        self.layers = 2
-       self.embed_size = 128
-       self.hidden_size = 128
+       self.embed_size = 1
+       self.hidden_size = 1
        self.src_vocab_size = vocab_size
        self.tgt_vocab_size = vocab_size
        
@@ -28,20 +29,21 @@ class EncoderDecoder:
         dy.renew_cg()
         W_y = dy.parameter(self.W_y)
         b_y = dy.parameter(self.b_y)
-        
+       
         src_sent = instance.split()
-        #print src_sent
+        print "printing src sentnce", len(src_sent)
         losses = []
         total_words = 0
       
         # Encoder
         enc_state = self.enc_builder.initial_state()
         for current_word in src_sent:
-	     #print current_word
+#	     print len(src_sent)
 	     state = enc_state.add_input(self.src_lookup[wids[current_word]])
 	     #print state.output().value()
-	encoded = state.output()
-	#print len(encoded.value())
+#             print numpy.shape(W_y.value())
+             encoded = (W_y * state.output()) + b_y
+#	print "encoded as ",  len(encoded.value())
 	#return encoded, 1
         
         #print "Encoding done"
@@ -49,23 +51,42 @@ class EncoderDecoder:
 	# Set initial decoder state to the result of the encoder
 	dec_state = self.dec_builder.initial_state()
 	dec_state = self.dec_builder.initial_state(encoded)
+#        ystar_array = []
 	#dec_state = [encoded]
 	#print "Set the decoder state"
 	errs = []
 	# Calculate losses for decoding
 	for (cw, nw) in zip(src_sent, src_sent[1:]):
-	  #print cw, nw
+#	  print "curent and next words are =======> ", wids
 	  dec_state = dec_state.add_input(self.tgt_lookup[wids[current_word]])
 	  #print "Initialized Decoder State"
-	  # calculate ystar
+	  decoded = dec_state.output()
+#          print "printing decoded value", decoded.value()
 	  ystar = (W_y * dec_state.output()) + b_y
-	  #print "Calculated ystar"
+#          ystar_array.append(ystar)
+#	  print "ystar_output", ystar
 	  # Calculate loss
+     ###     print "current word is >>>>>>>", cw
+     ###     print "next word shud be", nw
           loss = dy.pickneglogsoftmax(ystar, wids[nw])
           losses.append(loss)
           total_words += 1
-          
-        return dy.esum(losses), total_words, ystar  
+#          print "next wid", self.tgt_lookup[wids[nw]].value(), "ystar is", ystar.value()
+          dist_array = []
+          for i in range(0,len(ystar.value())):
+               #difference = self.tgt_lookup[wids[nw]].value() - ystar.value()[i]
+               dist = numpy.linalg.norm(self.tgt_lookup[wids[nw]].value() - ystar.value()[i])
+               dist_array.append(dist)
+#          print "distances array:", dist_array
+      ###    print "next_word ========>",  src_sent[dist_array.index(min(dist_array))]
+#        print "length of ystar value is", len(ystar.value())#, "original value is", wids[nw]
+#        print "preds are", len(ystar_array), ystar_array
+        #for i in range(0,len(ystar.value())):
+        #    if ystar.value()[i] > ystar.value()[i+1]
+        #       ystar.value()[i] = ystar.value()[i]
+        #    else:
+        #       ystar.value()[i] = ystar.value()[i+1]
+        return dy.esum(losses), total_words, src_sent[dist_array.index(min(dist_array))]
          
           
 class nnlm:
@@ -75,8 +96,8 @@ class nnlm:
          self.wids = defaultdict(lambda: len(self.wids))
          self.unigrams = {}
          self.model = dy.Model()
-         self.EMB_SIZE = 128
-         self.HID_SIZE  = 128
+         self.EMB_SIZE = 1
+         self.HID_SIZE  = 1
          self.N = 3
          M = self.model.add_lookup_parameters((len(self.wids), self.EMB_SIZE))
          W_mh = self.model.add_parameters((self.HID_SIZE, self.EMB_SIZE * (self.N-1)))
@@ -107,10 +128,11 @@ class nnlm:
          self.wids["<s>"] = 1
          self.wids["</s>"] = 2
          for w in self.unigrams:
-	   if self.unigrams[w] > 3:
+#	   if self.unigrams[w] > 3:
 	     self.wids[w] = len(self.wids)
-           else:
-             self.wids[w] = 0
+#           else:
+#             self.wids[w] = 0
+         print "prinitn wids frm nnlm--------------", self.wids
 	 return   
        
      def create_data(self, file):
