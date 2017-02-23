@@ -201,6 +201,102 @@ class RNNLanguageModel:
             if cw == stop: break
             if nchars and len(res) > nchars: break
         return res
+
+
+
+class RNNEncoderDecoder:
+  
+    def __init__(self, model, LAYERS, INPUT_DIM, HIDDEN_DIM, VOCAB_SIZE, lookup, builder=SimpleRNNBuilder):
+        self.builder = builder(LAYERS, INPUT_DIM, HIDDEN_DIM, model)
+
+        self.lookup = lookup
+        self.R = model.add_parameters((VOCAB_SIZE, HIDDEN_DIM))
+        self.bias = model.add_parameters((VOCAB_SIZE))
+
+    def save_to_disk(self, filename):
+        model.save(filename, [self.builder, self.lookup, self.R, self.bias])
+
+    def load_from_disk(self, filename):
+        (self.builder, self.lookup, self.R, self.bias) = model.load(filename)
+        
+    def build_lm_graph(self, sent):
+        renew_cg()
+        init_state = self.builder.initial_state()
+
+        R = parameter(self.R)
+        bias = parameter(self.bias)
+        errs = [] # will hold expressions
+        es=[]
+        state = init_state
+        for (cw,nw) in zip(sent,sent[1:]):
+            # assume word is already a word-id
+            x_t = lookup(self.lookup, int(cw))
+            state = state.add_input(x_t)
+            y_t = state.output()
+            r_t = bias + (R * y_t)
+            err = pickneglogsoftmax(r_t, int(nw))
+            errs.append(err)
+        nerr = esum(errs)
+        #return nerr
+        
+        encoded = r_t
+        dec_state = self.builder.initial_state()
+        dec_state = self.builder.initial_state(encoded)
+        decoder_errs = []
+        
+        # Calculate losses for decoding
+	for (cw, nw) in zip(sent, sent[1:]):
+	  x_t = lookup(self.lookup, int(cw))
+	  dec_state = dec_state.add_input(x_t)
+	  y_t = dec_state.output()
+	  ystar = (R * y_t) + bias
+	  err = pickneglogsoftmax(r_t, int(nw))
+	  decoder_errs.append(err)
+	derr = esum(decoder_errs)
+	return derr
+        
+        
+    
+    def predict_next_word(self, sentence):
+        renew_cg()
+        init_state = self.builder.initial_state()
+        R = parameter(self.R)
+        bias = parameter(self.bias)
+        state = init_state
+        for cw in sentence:
+            # assume word is already a word-id
+            x_t = lookup(self.lookup, int(cw))
+            state = state.add_input(x_t)
+        y_t = state.output()
+        r_t = bias + (R * y_t)
+        prob = softmax(r_t)
+        return prob
+    
+    def sample(self, first=1, nchars=0, stop=-1):
+        res = [first]
+        renew_cg()
+        state = self.builder.initial_state()
+
+        R = parameter(self.R)
+        bias = parameter(self.bias)
+        cw = first
+        while True:
+            x_t = lookup(self.lookup, cw)
+            state = state.add_input(x_t)
+            y_t = state.output()
+            r_t = bias + (R * y_t)
+            ydist = softmax(r_t)
+            dist = ydist.vec_value()
+            rnd = random.random()
+            for i,p in enumerate(dist):
+                rnd -= p
+                if rnd <= 0: break
+            res.append(i)
+            cw = i
+            if cw == stop: break
+            if nchars and len(res) > nchars: break
+        return res
+      
       
 class nnlm:
          
