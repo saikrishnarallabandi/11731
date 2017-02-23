@@ -8,8 +8,8 @@ from itertools import count
 w2i = defaultdict(count(0).next)
 model = dy.Model()     
 trainer = dy.SimpleSGDTrainer(model)
-filename = '../../../../dynet-base/dynet/examples/python/written.txt'
-#filename = 'txt.done.data'
+#filename = '../../../../dynet-base/dynet/examples/python/written.txt'
+filename = 'written.txt'
 lm = LM()
 
 #w2i = defaultdict(count(0).next)
@@ -31,7 +31,7 @@ words = list([i for i in line_array])
 #print "int to words", i2w
 s = [w2i[word] for word in words]
 i2w = list(words)
-print "printign dixt", "w2i--------------------->",len(w2i), "i2w============================>",len(i2w)
+print "printing words", "w2i--------------------->",len(w2i), "i2w============================>",len(i2w)
 wids = w2i
 
 ED = ed(len(wids))
@@ -49,19 +49,21 @@ for epoch in range(10):
  for sentence in sentences:
   sent = sent  + 1 
   if len(sentence.split()) > 2:
-     losses, num_words, pred = ED.encode(sentence, wids)
+     #loss, num_words, pred = ED.encode(sentence, wids)
+     loss = ED.encode(sentence, wids)
  #    print "wds are", num_words
 #     if sent % 100 == 1:
 #        print  "       ", sentence, losses.value(), cum_loss/ words 
-     gen_losses = losses.vec_value()
+     #gen_losses = losses.vec_value()
      #print "Gen_losses: ", gen_losses
-     loss = dy.sum_batches(losses)
-     cum_loss += loss.value()
-     words += num_words
+     #loss = dy.sum_batches(losses)
+     #cum_loss += loss.value()
+     #words += num_words
+     print loss.scalar_value()
      loss.backward()
      #print "Back propagated the loss"
-     trainer.update(1)
-     print "printing o/p wordsids", pred
+     trainer.update(0.1)
+     #print "printing o/p wordsids", pred
    #  prob = []
    #  for i in range(0,len(pred.value())):
    #      if pred.value()[i] > 0:

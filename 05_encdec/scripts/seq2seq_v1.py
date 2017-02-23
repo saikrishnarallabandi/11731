@@ -4,10 +4,70 @@ import numpy as np
 import os
 from collections import defaultdict
 import dynet as dy
+from dynet import *
 import numpy
+import random
 
 
 class EncoderDecoder:
+   
+     def __init__(self, vocab_size):
+       self.model = Model()
+       self.trainer = SimpleSGDTrainer(self.model)
+       self.layers = 2
+       self.embed_size = 128
+       self.hidden_size = 128
+       self.src_vocab_size = vocab_size
+       self.tgt_vocab_size = vocab_size
+       
+       self.enc_builder = LSTMBuilder(self.layers, self.embed_size, self.hidden_size, self.model) 
+       self.dec_builder = LSTMBuilder(self.layers, self.embed_size, self.hidden_size, self.model) 
+       self.src_lookup = self.model.add_lookup_parameters((self.src_vocab_size, self.embed_size))
+       self.tgt_lookup = self.model.add_lookup_parameters((self.tgt_vocab_size, self.embed_size))
+       self.W_y = self.model.add_parameters((self.tgt_vocab_size, self.hidden_size))
+       self.b_y = self.model.add_parameters((self.tgt_vocab_size))
+       
+     def encode(self, instance, wids):
+        dy.renew_cg()
+        W_y = dy.parameter(self.W_y)
+        b_y = dy.parameter(self.b_y)
+#        print "chceking wids here",wids["about"]
+        src_sent = instance.split()
+        #print "printing src sentnce length", len(src_sent)
+        losses = []
+        total_words = 0
+      
+        # Encoder
+        enc_state = self.enc_builder.initial_state()
+        for current_word in src_sent:
+            state = enc_state.add_input(self.src_lookup[wids[current_word]])
+	    encoded = (W_y * state.output()) + b_y
+
+
+	dec_state = self.dec_builder.initial_state()
+	dec_state = self.dec_builder.initial_state(encoded)
+	errs = []
+	# Calculate losses for decoding
+	for (cw, nw) in zip(src_sent, src_sent[1:]):
+	  dec_state = dec_state.add_input(self.tgt_lookup[wids[current_word]])
+	  decoded = dec_state.output()
+	  ystar = (W_y * dec_state.output()) + b_y
+          #print "current word is >>>>>>>", cw
+          #print "next word shud be", nw
+          loss = dy.pickneglogsoftmax(ystar, wids[nw])
+          losses.append(loss)
+          '''
+          total_words += 1
+          dist_array = []
+          for i in range(0,len(ystar.value())):
+               dist = numpy.linalg.norm(self.tgt_lookup[wids[nw]].value() - ystar.value()[i])
+               dist_array.append(dist)
+          #print " predicted next_word ========>",  src_sent[dist_array.index(min(dist_array))]
+          '''
+        return dy.esum(losses) #, total_words, src_sent[dist_array.index(min(dist_array))]
+
+
+class EncoderDecoder_debug:
    
      def __init__(self, vocab_size):
        self.model = dy.Model()
@@ -31,69 +91,37 @@ class EncoderDecoder:
         b_y = dy.parameter(self.b_y)
 #        print "chceking wids here",wids["about"]
         src_sent = instance.split()
-        print "printing src sentnce", len(src_sent)
+        #print "printing src sentnce length", len(src_sent)
         losses = []
         total_words = 0
       
         # Encoder
         enc_state = self.enc_builder.initial_state()
         for current_word in src_sent:
-#	     print len(src_sent)
-	     state = enc_state.add_input(self.src_lookup[wids[current_word]])
-	     #print state.output().value()
-#             print numpy.shape(W_y.value())
-             encoded = (W_y * state.output()) + b_y
-#	print "encoded as ",  len(encoded.value())
-	#return encoded, 1
-        
-        #print "Encoding done"
-        
-	# Set initial decoder state to the result of the encoder
+            state = enc_state.add_input(self.src_lookup[wids[current_word]])
+	    encoded = (W_y * state.output()) + b_y
+
+
 	dec_state = self.dec_builder.initial_state()
 	dec_state = self.dec_builder.initial_state(encoded)
-#        ystar_array = []
-	#dec_state = [encoded]
-	#print "Set the decoder state"
 	errs = []
 	# Calculate losses for decoding
 	for (cw, nw) in zip(src_sent, src_sent[1:]):
-#	  print "curent and next words are =======> ", wids
 	  dec_state = dec_state.add_input(self.tgt_lookup[wids[current_word]])
-	  #print "Initialized Decoder State"
 	  decoded = dec_state.output()
-#          print "printing decoded value", decoded.value()
 	  ystar = (W_y * dec_state.output()) + b_y
-#          ystar_array.append(ystar)
-#	  print "ystar_output", ystar
-	  # Calculate loss
           print "current word is >>>>>>>", cw
           print "next word shud be", nw
-          loss = dy.pickneglogsoftmax(ystar, wids[nw])
-          losses.append(loss)
-          total_words += 1
-#          print "next wid", self.tgt_lookup[wids[nw]].value(), "ystar is", ystar.value()
-          dist_array = []
-          for i in range(0,len(ystar.value())):
-               #difference = self.tgt_lookup[wids[nw]].value() - ystar.value()[i]
-               dist = numpy.linalg.norm(self.tgt_lookup[wids[nw]].value() - ystar.value()[i])
-               dist_array.append(dist)
-#          print "distances array:", dist_array
-          print " predicted next_word ========>",  src_sent[dist_array.index(min(dist_array))]
-#        print "length of ystar value is", len(ystar.value())#, "original value is", wids[nw]
-#        print "preds are", len(ystar_array), ystar_array
-        #for i in range(0,len(ystar.value())):
-        #    if ystar.value()[i] > ystar.value()[i+1]
-        #       ystar.value()[i] = ystar.value()[i]
-        #    else:
-        #       ystar.value()[i] = ystar.value()[i+1]
-        return dy.esum(losses), total_words, src_sent[dist_array.index(min(dist_array))]
-         
-          
+          #loss = dy.pickneglogsoftmax(ystar, wids[nw])
+          for wid in wids:
+	     loss = dy.pickneglogsoftmax(ystar, wids[wid])
+	     print "Loss for ", wid, " w.r.t ", nw, " is ", loss.value()   
+           
 class nnlm:
          
      def __init__(self):         
          self.feats_and_values ={}
-         self.wids = defaultdict(lambda: len(self.wids))
+         self.wids = defaultdict(lambda:  len(self.wids))
          self.unigrams = {}
          self.model = dy.Model()
          self.EMB_SIZE = 1
