@@ -39,9 +39,13 @@ class EncoderDecoder:
       
         # Encoder
         enc_state = self.enc_builder.initial_state()
-        for current_word in src_sent:
-            state = enc_state.add_input(self.src_lookup[wids[current_word]])
+        #for current_word in src_sent:
+	for (cw, nw) in zip(src_sent, src_sent[1:]):  
+            state = enc_state.add_input(self.src_lookup[wids[cw]])
 	    encoded = (W_y * state.output()) + b_y
+	    err = pickneglogsoftmax(encoded, int(wids[nw]))
+	    losses.append(err)
+	return dy.esum(losses)    
 
 
 	dec_state = self.dec_builder.initial_state()
@@ -116,7 +120,88 @@ class EncoderDecoder_debug:
           for wid in wids:
 	     loss = dy.pickneglogsoftmax(ystar, wids[wid])
 	     print "Loss for ", wid, " w.r.t ", nw, " is ", loss.value()   
-           
+
+
+
+from collections import defaultdict
+from itertools import count
+import sys
+
+class RNNLanguageModel:
+  
+    def __init__(self, model, LAYERS, INPUT_DIM, HIDDEN_DIM, VOCAB_SIZE, builder=SimpleRNNBuilder):
+        self.builder = builder(LAYERS, INPUT_DIM, HIDDEN_DIM, model)
+
+        self.lookup = model.add_lookup_parameters((VOCAB_SIZE, INPUT_DIM))
+        self.R = model.add_parameters((VOCAB_SIZE, HIDDEN_DIM))
+        self.bias = model.add_parameters((VOCAB_SIZE))
+
+    def save_to_disk(self, filename):
+        model.save(filename, [self.builder, self.lookup, self.R, self.bias])
+
+    def load_from_disk(self, filename):
+        (self.builder, self.lookup, self.R, self.bias) = model.load(filename)
+        
+    def build_lm_graph(self, sent):
+        renew_cg()
+        init_state = self.builder.initial_state()
+
+        R = parameter(self.R)
+        bias = parameter(self.bias)
+        errs = [] # will hold expressions
+        es=[]
+        state = init_state
+        for (cw,nw) in zip(sent,sent[1:]):
+            # assume word is already a word-id
+            x_t = lookup(self.lookup, int(cw))
+            state = state.add_input(x_t)
+            y_t = state.output()
+            r_t = bias + (R * y_t)
+            err = pickneglogsoftmax(r_t, int(nw))
+            errs.append(err)
+        nerr = esum(errs)
+        return nerr
+    
+    def predict_next_word(self, sentence):
+        renew_cg()
+        init_state = self.builder.initial_state()
+        R = parameter(self.R)
+        bias = parameter(self.bias)
+        state = init_state
+        for cw in sentence:
+            # assume word is already a word-id
+            x_t = lookup(self.lookup, int(cw))
+            state = state.add_input(x_t)
+        y_t = state.output()
+        r_t = bias + (R * y_t)
+        prob = softmax(r_t)
+        return prob
+    
+    def sample(self, first=1, nchars=0, stop=-1):
+        res = [first]
+        renew_cg()
+        state = self.builder.initial_state()
+
+        R = parameter(self.R)
+        bias = parameter(self.bias)
+        cw = first
+        while True:
+            x_t = lookup(self.lookup, cw)
+            state = state.add_input(x_t)
+            y_t = state.output()
+            r_t = bias + (R * y_t)
+            ydist = softmax(r_t)
+            dist = ydist.vec_value()
+            rnd = random.random()
+            for i,p in enumerate(dist):
+                rnd -= p
+                if rnd <= 0: break
+            res.append(i)
+            cw = i
+            if cw == stop: break
+            if nchars and len(res) > nchars: break
+        return res
+      
 class nnlm:
          
      def __init__(self):         
@@ -160,7 +245,7 @@ class nnlm:
 	     self.wids[w] = len(self.wids)
 #           else:
 #             self.wids[w] = 0
-         print "prinitn wids frm nnlm--------------", self.wids
+         #print "prinitn wids frm nnlm--------------", self.wids
 	 return   
        
      def create_data(self, file):
