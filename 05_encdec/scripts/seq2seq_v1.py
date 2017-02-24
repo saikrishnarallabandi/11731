@@ -7,6 +7,8 @@ import dynet as dy
 from dynet import *
 import numpy
 import random
+from nltk.tokenize import RegexpTokenizer 
+
 
 
 class EncoderDecoder:
@@ -299,6 +301,7 @@ class RNNEncoderDecoder:
       
       
 class nnlm:
+
          
      def __init__(self):         
          self.feats_and_values ={}
@@ -316,11 +319,47 @@ class nnlm:
 
      def read_corpus(self, file):
        print file
+       tokenizer = RegexpTokenizer(r'\w+')
        f = open(file)
        self.data_array_train = []
        for line in f:
           line = '<s> ' + line.split('\n')[0] + ' </s>'          
           words = line.split()
+          for word in words:
+	      if word == '<s>' or '</s>':
+	           pass
+	      else: 
+	        word = tokenizer.tokenize(word)[0]
+	        
+              if word in self.unigrams:
+		self.unigrams[word] = self.unigrams[word] + 1
+              else:
+		self.unigrams[word] = 1 
+       f.close()         
+       self.assign_ids()
+       self.create_data(file)
+       self.save_wids()
+       return self.trigramfeaturedict, self.wids
+
+     def save_wids(self):
+       f = open('wids.txt','w')
+       for w in self.wids:
+	   f.write(w + ' ' + str(self.wids[w]) + '\n')
+       f.close()     
+
+     '''       
+from nltk.tokenize import RegexpTokenizer 
+
+
+     def read_corpus(self, file):
+       print file
+       f = open(file)
+       tokenizer = RegexpTokenizer(r'\w+')
+       self.data_array_train = []
+       for line in f:
+          line = line.split('\n')[0]
+          line = ['<s>'] + tokenizer.tokenize(line) + ['</s>']
+          words = [w.lower() for w in line]
           for word in words:
               if word in self.unigrams:
 		self.unigrams[word] = self.unigrams[word] + 1
@@ -329,16 +368,26 @@ class nnlm:
        f.close()         
        self.assign_ids()
        self.create_data(file)
+       self.save_wids()
        return self.trigramfeaturedict, self.wids
        
-       
+     def save_wids(self):
+       f = open('wids.txt','w')
+       for w in self.wids:
+	   f.write(w + ' ' + str(self.wids[w]) + '\n')
+       f.close()	   
+
+
+   
+   
+'''   
      def assign_ids(self):
          self.wids["<unk>"] = 0
          self.wids["<s>"] = 1
          self.wids["</s>"] = 2
          for w in self.unigrams:
 #	   if self.unigrams[w] > 3:
-	     self.wids[w] = len(self.wids)
+	     self.wids[w]
 #           else:
 #             self.wids[w] = 0
          #print "prinitn wids frm nnlm--------------", self.wids

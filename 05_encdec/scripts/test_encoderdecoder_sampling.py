@@ -53,7 +53,7 @@ for epoch in range(100):
          loss = 0
          words = 0
          for _ in range(1):
-             samp = red.sample(first=wids["<s>"],nchars= 30,stop=wids["</s>"])
+             samp = red.sample(nchars= 30,stop=wids["</s>"])
              print(" ".join([i2w[c] for c in samp]).strip())
     words += len(sentence) - 1
     isent = get_indexed(sentence)
