@@ -1,0 +1,907 @@
+nohup: ignoring input
+[dynet] random seed: 1681499055
+[dynet] allocating memory: 512MB
+[dynet] memory allocation done.
+txt.done.data
+wids lengtj is 3507
+[epoch=0 eta=0.1 clips=217 updates=249] 7.27616011503
+[epoch=0 eta=0.1 clips=245 updates=250] 7.05821365059
+[epoch=0 eta=0.1 clips=245 updates=250] 6.90622980938
+[epoch=0 eta=0.1 clips=234 updates=250] 6.89486924819
+
+
+('ITER', 0, 7248.210304260254)
+
+
+[epoch=0 eta=0.1 clips=129 updates=137] [epoch=1 eta=0.1 clips=236 updates=249] 6.77127816144
+[epoch=1 eta=0.1 clips=243 updates=250] 6.65160412783
+[epoch=1 eta=0.1 clips=249 updates=250] 6.68022600713
+[epoch=1 eta=0.1 clips=243 updates=250] 6.65538748022
+
+
+('ITER', 1, 7293.0661334991455)
+
+
+[epoch=1 eta=0.1 clips=134 updates=137] [epoch=2 eta=0.1 clips=246 updates=249] 6.4987728342
+[epoch=2 eta=0.1 clips=246 updates=250] 6.37576619209
+[epoch=2 eta=0.1 clips=248 updates=250] 6.39750901437
+[epoch=2 eta=0.1 clips=250 updates=250] 6.31790686578
+
+
+('ITER', 2, 6662.924348831177)
+
+
+[epoch=2 eta=0.1 clips=136 updates=137] [epoch=3 eta=0.1 clips=247 updates=249] 6.21838403505
+[epoch=3 eta=0.1 clips=250 updates=250] 6.0993501792
+[epoch=3 eta=0.1 clips=249 updates=250] 6.07624359131
+[epoch=3 eta=0.1 clips=249 updates=250] 6.08638771575
+
+
+('ITER', 3, 6475.565765380859)
+
+
+[epoch=3 eta=0.1 clips=137 updates=137] [epoch=4 eta=0.1 clips=248 updates=249] 5.83383024275
+[epoch=4 eta=0.1 clips=249 updates=250] 5.77762811136
+[epoch=4 eta=0.1 clips=250 updates=250] 5.81200347652
+[epoch=4 eta=0.1 clips=250 updates=250] 5.75905664945
+
+
+('ITER', 4, 6345.313774108887)
+
+
+[epoch=4 eta=0.1 clips=137 updates=137] [epoch=5 eta=0.1 clips=249 updates=249] 5.56044326356
+[epoch=5 eta=0.1 clips=250 updates=250] 5.41218407502
+[epoch=5 eta=0.1 clips=250 updates=250] 5.52936448047
+[epoch=5 eta=0.1 clips=250 updates=250] 5.52314926354
+
+
+('ITER', 5, 6403.649341583252)
+
+
+[epoch=5 eta=0.1 clips=137 updates=137] [epoch=6 eta=0.1 clips=249 updates=249] 5.24974540599
+[epoch=6 eta=0.1 clips=250 updates=250] 5.15193796016
+[epoch=6 eta=0.1 clips=250 updates=250] 5.21405565615
+[epoch=6 eta=0.1 clips=250 updates=250] 5.29022934507
+
+
+('ITER', 6, 5663.584924697876)
+
+
+[epoch=6 eta=0.1 clips=137 updates=137] [epoch=7 eta=0.1 clips=249 updates=249] 4.98204264404
+[epoch=7 eta=0.1 clips=250 updates=250] 4.89018691425
+[epoch=7 eta=0.1 clips=250 updates=250] 5.00752374989
+[epoch=7 eta=0.1 clips=250 updates=250] 4.96869298857
+
+
+('ITER', 7, 5172.11220741272)
+
+
+[epoch=7 eta=0.1 clips=137 updates=137] [epoch=8 eta=0.1 clips=249 updates=249] 4.65425415835
+[epoch=8 eta=0.1 clips=250 updates=250] 4.60827235091
+[epoch=8 eta=0.1 clips=250 updates=250] 4.64713856112
+[epoch=8 eta=0.1 clips=250 updates=250] 4.72973487957
+
+
+('ITER', 8, 4966.28645658493)
+
+
+[epoch=8 eta=0.1 clips=137 updates=137] [epoch=9 eta=0.1 clips=249 updates=249] 4.42286039388
+[epoch=9 eta=0.1 clips=250 updates=250] 4.31669430149
+[epoch=9 eta=0.1 clips=250 updates=250] 4.37941721452
+[epoch=9 eta=0.1 clips=250 updates=250] 4.45988682867
+
+
+('ITER', 9, 4556.424352645874)
+
+
+[epoch=9 eta=0.1 clips=137 updates=137] [epoch=10 eta=0.1 clips=249 updates=249] 4.15162068857
+[epoch=10 eta=0.1 clips=250 updates=250] 4.07432116437
+[epoch=10 eta=0.1 clips=250 updates=250] 4.20015669523
+[epoch=10 eta=0.1 clips=250 updates=250] 4.19175412767
+
+
+('ITER', 10, 4357.443099498749)
+
+
+[epoch=10 eta=0.1 clips=137 updates=137] [epoch=11 eta=0.1 clips=249 updates=249] 3.93004066555
+[epoch=11 eta=0.1 clips=250 updates=250] 3.877679465
+[epoch=11 eta=0.1 clips=250 updates=250] 3.8585593264
+[epoch=11 eta=0.1 clips=250 updates=250] 3.94108108194
+
+
+('ITER', 11, 4267.10854434967)
+
+
+[epoch=11 eta=0.1 clips=137 updates=137] [epoch=12 eta=0.1 clips=249 updates=249] 3.69492480352
+[epoch=12 eta=0.1 clips=250 updates=250] 3.58954959741
+[epoch=12 eta=0.1 clips=250 updates=250] 3.72147549262
+[epoch=12 eta=0.1 clips=250 updates=250] 3.73527971765
+
+
+('ITER', 12, 4101.833028316498)
+
+
+[epoch=12 eta=0.1 clips=137 updates=137] [epoch=13 eta=0.1 clips=249 updates=249] 3.47952696913
+[epoch=13 eta=0.1 clips=250 updates=250] 3.40589373966
+[epoch=13 eta=0.1 clips=250 updates=250] 3.53358588934
+[epoch=13 eta=0.1 clips=250 updates=250] 3.47316789974
+
+
+('ITER', 13, 3720.583206176758)
+
+
+[epoch=13 eta=0.1 clips=137 updates=137] [epoch=14 eta=0.1 clips=249 updates=249] 3.19699409892
+[epoch=14 eta=0.1 clips=250 updates=250] 3.17207142867
+[epoch=14 eta=0.1 clips=250 updates=250] 3.33054819742
+[epoch=14 eta=0.1 clips=250 updates=250] 3.30565870823
+
+
+('ITER', 14, 3682.8058109283447)
+
+
+[epoch=14 eta=0.1 clips=137 updates=137] [epoch=15 eta=0.1 clips=249 updates=249] 3.08317091566
+[epoch=15 eta=0.1 clips=250 updates=250] 3.01530037014
+[epoch=15 eta=0.1 clips=250 updates=250] 2.98318413462
+[epoch=15 eta=0.1 clips=250 updates=250] 3.13909612969
+
+
+('ITER', 15, 3473.841820716858)
+
+
+[epoch=15 eta=0.1 clips=137 updates=137] [epoch=16 eta=0.1 clips=248 updates=249] 2.87006211398
+[epoch=16 eta=0.1 clips=250 updates=250] 2.80936615643
+[epoch=16 eta=0.1 clips=250 updates=250] 2.84040625824
+[epoch=16 eta=0.1 clips=250 updates=250] 2.91134462678
+
+
+('ITER', 16, 3144.155602455139)
+
+
+[epoch=16 eta=0.1 clips=137 updates=137] [epoch=17 eta=0.1 clips=249 updates=249] 2.67923356339
+[epoch=17 eta=0.1 clips=250 updates=250] 2.65420351902
+[epoch=17 eta=0.1 clips=250 updates=250] 2.64878293293
+[epoch=17 eta=0.1 clips=250 updates=250] 2.73598229976
+
+
+('ITER', 17, 2882.065264225006)
+
+
+[epoch=17 eta=0.1 clips=137 updates=137] [epoch=18 eta=0.1 clips=249 updates=249] 2.49713669412
+[epoch=18 eta=0.1 clips=250 updates=250] 2.57503769277
+[epoch=18 eta=0.1 clips=250 updates=250] 2.44471584034
+[epoch=18 eta=0.1 clips=250 updates=250] 2.48345110171
+
+
+('ITER', 18, 2787.0639386177063)
+
+
+[epoch=18 eta=0.1 clips=137 updates=137] [epoch=19 eta=0.1 clips=248 updates=249] 2.31176845314
+[epoch=19 eta=0.1 clips=249 updates=250] 2.32372675551
+[epoch=19 eta=0.1 clips=250 updates=250] 2.32121172698
+[epoch=19 eta=0.1 clips=250 updates=250] 2.42898895486
+
+
+('ITER', 19, 2476.3084602355957)
+
+
+[epoch=19 eta=0.1 clips=137 updates=137] [epoch=20 eta=0.1 clips=249 updates=249] 2.1390915456
+[epoch=20 eta=0.1 clips=250 updates=250] 2.14343577565
+[epoch=20 eta=0.1 clips=250 updates=250] 2.18321833779
+[epoch=20 eta=0.1 clips=249 updates=250] 2.24141559389
+
+
+('ITER', 20, 2562.4529843330383)
+
+
+[epoch=20 eta=0.1 clips=137 updates=137] [epoch=21 eta=0.1 clips=247 updates=249] 2.00863841044
+[epoch=21 eta=0.1 clips=249 updates=250] 2.0142882689
+[epoch=21 eta=0.1 clips=250 updates=250] 2.03103761029
+[epoch=21 eta=0.1 clips=250 updates=250] 2.08690123769
+
+
+('ITER', 21, 2294.2782282829285)
+
+
+[epoch=21 eta=0.1 clips=137 updates=137] [epoch=22 eta=0.1 clips=248 updates=249] 1.88015215093
+[epoch=22 eta=0.1 clips=249 updates=250] 1.83281958195
+[epoch=22 eta=0.1 clips=249 updates=250] 1.89510192395
+[epoch=22 eta=0.1 clips=250 updates=250] 1.88075756867
+
+
+('ITER', 22, 2110.92781829834)
+
+
+[epoch=22 eta=0.1 clips=137 updates=137] [epoch=23 eta=0.1 clips=249 updates=249] 1.74715754972
+[epoch=23 eta=0.1 clips=248 updates=250] 1.64617250699
+[epoch=23 eta=0.1 clips=248 updates=250] 1.76008150155
+[epoch=23 eta=0.1 clips=249 updates=250] 1.80353284427
+
+
+('ITER', 23, 2085.417098045349)
+
+
+[epoch=23 eta=0.1 clips=137 updates=137] [epoch=24 eta=0.1 clips=245 updates=249] 1.65789863985
+[epoch=24 eta=0.1 clips=249 updates=250] 1.52403812297
+[epoch=24 eta=0.1 clips=249 updates=250] 1.63706270394
+[epoch=24 eta=0.1 clips=248 updates=250] 1.64062331363
+
+
+('ITER', 24, 1906.1677708625793)
+
+
+[epoch=24 eta=0.1 clips=135 updates=137] [epoch=25 eta=0.1 clips=242 updates=249] 1.49259734121
+[epoch=25 eta=0.1 clips=246 updates=250] 1.4687984294
+[epoch=25 eta=0.1 clips=248 updates=250] 1.48158369039
+[epoch=25 eta=0.1 clips=250 updates=250] 1.57008890947
+
+
+('ITER', 25, 1947.7484312057495)
+
+
+[epoch=25 eta=0.1 clips=137 updates=137] [epoch=26 eta=0.1 clips=244 updates=249] 1.46749114778
+[epoch=26 eta=0.1 clips=244 updates=250] 1.32838094241
+[epoch=26 eta=0.1 clips=243 updates=250] 1.39848404465
+[epoch=26 eta=0.1 clips=248 updates=250] 1.42112648592
+
+
+('ITER', 26, 1624.0315251350403)
+
+
+[epoch=26 eta=0.1 clips=137 updates=137] [epoch=27 eta=0.1 clips=247 updates=249] 1.33118681936
+[epoch=27 eta=0.1 clips=245 updates=250] 1.23196661546
+[epoch=27 eta=0.1 clips=247 updates=250] 1.30781538727
+[epoch=27 eta=0.1 clips=246 updates=250] 1.34529661973
+
+
+('ITER', 27, 1527.9991092681885)
+
+
+[epoch=27 eta=0.1 clips=134 updates=137] [epoch=28 eta=0.1 clips=242 updates=249] 1.17094825751
+[epoch=28 eta=0.1 clips=246 updates=250] 1.20947670118
+[epoch=28 eta=0.1 clips=238 updates=250] 1.22858769829
+[epoch=28 eta=0.1 clips=243 updates=250] 1.25056569137
+
+
+('ITER', 28, 1391.9483804702759)
+
+
+[epoch=28 eta=0.1 clips=137 updates=137] [epoch=29 eta=0.1 clips=237 updates=249] 1.11799822032
+[epoch=29 eta=0.1 clips=240 updates=250] 1.04795813249
+[epoch=29 eta=0.1 clips=244 updates=250] 1.14303320107
+[epoch=29 eta=0.1 clips=245 updates=250] 1.16266053773
+
+
+('ITER', 29, 1276.9690432548523)
+
+
+[epoch=29 eta=0.1 clips=133 updates=137] [epoch=30 eta=0.1 clips=238 updates=249] 1.0403227958
+[epoch=30 eta=0.1 clips=245 updates=250] 1.0050999623
+[epoch=30 eta=0.1 clips=242 updates=250] 1.10599047052
+[epoch=30 eta=0.1 clips=241 updates=250] 1.08198188039
+
+
+('ITER', 30, 1165.9802837371826)
+
+
+[epoch=30 eta=0.1 clips=133 updates=137] [epoch=31 eta=0.1 clips=233 updates=249] 0.957475739334
+[epoch=31 eta=0.1 clips=231 updates=250] 0.944268288355
+[epoch=31 eta=0.1 clips=240 updates=250] 1.00367883438
+[epoch=31 eta=0.1 clips=242 updates=250] 0.97420359822
+
+
+('ITER', 31, 1202.817940235138)
+
+
+[epoch=31 eta=0.1 clips=132 updates=137] [epoch=32 eta=0.1 clips=232 updates=249] 0.956232202854
+[epoch=32 eta=0.1 clips=227 updates=250] 0.893119227772
+[epoch=32 eta=0.1 clips=237 updates=250] 0.900945534998
+[epoch=32 eta=0.1 clips=240 updates=250] 0.972664128306
+
+
+('ITER', 32, 1068.632921218872)
+
+
+[epoch=32 eta=0.1 clips=130 updates=137] [epoch=33 eta=0.1 clips=227 updates=249] 0.852285005718
+[epoch=33 eta=0.1 clips=230 updates=250] 0.841173509869
+[epoch=33 eta=0.1 clips=229 updates=250] 0.862459287688
+[epoch=33 eta=0.1 clips=240 updates=250] 0.883996976926
+
+
+('ITER', 33, 998.097749710083)
+
+
+[epoch=33 eta=0.1 clips=129 updates=137] [epoch=34 eta=0.1 clips=224 updates=249] 0.798017043411
+[epoch=34 eta=0.1 clips=226 updates=250] 0.752857828606
+[epoch=34 eta=0.1 clips=229 updates=250] 0.801001080216
+[epoch=34 eta=0.1 clips=235 updates=250] 0.880437911954
+
+
+('ITER', 34, 928.2102999687195)
+
+
+[epoch=34 eta=0.1 clips=129 updates=137] [epoch=35 eta=0.1 clips=217 updates=249] 0.729114277944
+[epoch=35 eta=0.1 clips=221 updates=250] 0.746775009644
+[epoch=35 eta=0.1 clips=227 updates=250] 0.751566406878
+[epoch=35 eta=0.1 clips=239 updates=250] 0.845189740408
+
+
+('ITER', 35, 857.3277659416199)
+
+
+[epoch=35 eta=0.1 clips=128 updates=137] [epoch=36 eta=0.1 clips=220 updates=249] 0.701272118942
+[epoch=36 eta=0.1 clips=221 updates=250] 0.66379871601
+[epoch=36 eta=0.1 clips=223 updates=250] 0.758548978257
+[epoch=36 eta=0.1 clips=233 updates=250] 0.780797408823
+
+
+('ITER', 36, 784.3423380851746)
+
+
+[epoch=36 eta=0.1 clips=124 updates=137] [epoch=37 eta=0.1 clips=218 updates=249] 0.65990274578
+[epoch=37 eta=0.1 clips=221 updates=250] 0.6453048322
+[epoch=37 eta=0.1 clips=227 updates=250] 0.69762844552
+[epoch=37 eta=0.1 clips=227 updates=250] 0.71988835514
+
+
+('ITER', 37, 751.6858215332031)
+
+
+[epoch=37 eta=0.1 clips=124 updates=137] [epoch=38 eta=0.1 clips=218 updates=249] 0.629157721877
+[epoch=38 eta=0.1 clips=218 updates=250] 0.62378954814
+[epoch=38 eta=0.1 clips=222 updates=250] 0.64393206492
+[epoch=38 eta=0.1 clips=225 updates=250] 0.699332949938
+
+
+('ITER', 38, 739.0419454574585)
+
+
+[epoch=38 eta=0.1 clips=121 updates=137] [epoch=39 eta=0.1 clips=220 updates=249] 0.646617259506
+[epoch=39 eta=0.1 clips=207 updates=250] 0.587264245634
+[epoch=39 eta=0.1 clips=222 updates=250] 0.648498329389
+[epoch=39 eta=0.1 clips=210 updates=250] 0.608263709085
+
+
+('ITER', 39, 680.8577127456665)
+
+
+[epoch=39 eta=0.1 clips=120 updates=137] [epoch=40 eta=0.1 clips=215 updates=249] 0.61506743948
+[epoch=40 eta=0.1 clips=207 updates=250] 0.583206179433
+[epoch=40 eta=0.1 clips=205 updates=250] 0.590309429603
+[epoch=40 eta=0.1 clips=218 updates=250] 0.652944740879
+
+
+('ITER', 40, 605.6345505714417)
+
+
+[epoch=40 eta=0.1 clips=110 updates=137] [epoch=41 eta=0.1 clips=206 updates=249] 0.563222618109
+[epoch=41 eta=0.1 clips=205 updates=250] 0.568551613849
+[epoch=41 eta=0.1 clips=193 updates=250] 0.583108816592
+[epoch=41 eta=0.1 clips=208 updates=250] 0.611828499405
+
+
+('ITER', 41, 656.5612759590149)
+
+
+[epoch=41 eta=0.1 clips=117 updates=137] [epoch=42 eta=0.1 clips=203 updates=249] 0.550706016976
+[epoch=42 eta=0.1 clips=193 updates=250] 0.559961156326
+[epoch=42 eta=0.1 clips=197 updates=250] 0.571493163949
+[epoch=42 eta=0.1 clips=198 updates=250] 0.585278589271
+
+
+('ITER', 42, 652.4839196205139)
+
+
+[epoch=42 eta=0.1 clips=112 updates=137] [epoch=43 eta=0.1 clips=189 updates=249] 0.536029443451
+[epoch=43 eta=0.1 clips=194 updates=250] 0.525596348054
+[epoch=43 eta=0.1 clips=195 updates=250] 0.548736367737
+[epoch=43 eta=0.1 clips=198 updates=250] 0.599032112107
+
+
+('ITER', 43, 612.5128827095032)
+
+
+[epoch=43 eta=0.1 clips=104 updates=137] [epoch=44 eta=0.1 clips=179 updates=249] 0.520372525338
+[epoch=44 eta=0.1 clips=186 updates=250] 0.533738400132
+[epoch=44 eta=0.1 clips=185 updates=250] 0.566084079027
+[epoch=44 eta=0.1 clips=188 updates=250] 0.565314464945
+
+
+('ITER', 44, 576.0977849960327)
+
+
+[epoch=44 eta=0.1 clips=101 updates=137] [epoch=45 eta=0.1 clips=170 updates=249] 0.495282761049
+[epoch=45 eta=0.1 clips=166 updates=250] 0.491626885629
+[epoch=45 eta=0.1 clips=179 updates=250] 0.552744661522
+[epoch=45 eta=0.1 clips=187 updates=250] 0.571408587121
+
+
+('ITER', 45, 626.9272170066833)
+
+
+[epoch=45 eta=0.1 clips=103 updates=137] [epoch=46 eta=0.1 clips=167 updates=249] 0.508514751958
+[epoch=46 eta=0.1 clips=169 updates=250] 0.525476079238
+[epoch=46 eta=0.1 clips=177 updates=250] 0.523326349015
+[epoch=46 eta=0.1 clips=173 updates=250] 0.548139285206
+
+
+('ITER', 46, 547.4622025489807)
+
+
+[epoch=46 eta=0.1 clips=88 updates=137] [epoch=47 eta=0.1 clips=154 updates=249] 0.467257922648
+[epoch=47 eta=0.1 clips=160 updates=250] 0.498601928049
+[epoch=47 eta=0.1 clips=161 updates=250] 0.5250007762
+[epoch=47 eta=0.1 clips=166 updates=250] 0.531977175943
+
+
+('ITER', 47, 606.5663814544678)
+
+
+[epoch=47 eta=0.1 clips=96 updates=137] [epoch=48 eta=0.1 clips=149 updates=249] 0.473349872588
+[epoch=48 eta=0.1 clips=150 updates=250] 0.486642329799
+[epoch=48 eta=0.1 clips=167 updates=250] 0.519468785782
+[epoch=48 eta=0.1 clips=154 updates=250] 0.556439698732
+
+
+('ITER', 48, 551.546293258667)
+
+
+[epoch=48 eta=0.1 clips=83 updates=137] [epoch=49 eta=0.1 clips=145 updates=249] 0.468792723311
+[epoch=49 eta=0.1 clips=146 updates=250] 0.491883922457
+[epoch=49 eta=0.1 clips=140 updates=250] 0.496099679705
+[epoch=49 eta=0.1 clips=160 updates=250] 0.535301387495
+
+
+('ITER', 49, 540.9537229537964)
+
+
+[epoch=49 eta=0.1 clips=83 updates=137] [epoch=50 eta=0.1 clips=130 updates=249] 0.456981719732
+[epoch=50 eta=0.1 clips=143 updates=250] 0.500495566035
+[epoch=50 eta=0.1 clips=142 updates=250] 0.513460592504
+[epoch=50 eta=0.1 clips=148 updates=250] 0.500752806538
+
+
+('ITER', 50, 545.6611456871033)
+
+
+[epoch=50 eta=0.1 clips=80 updates=137] [epoch=51 eta=0.1 clips=139 updates=249] 0.477197100223
+[epoch=51 eta=0.1 clips=133 updates=250] 0.459684346134
+[epoch=51 eta=0.1 clips=149 updates=250] 0.512395661726
+[epoch=51 eta=0.1 clips=136 updates=250] 0.514897045389
+
+
+('ITER', 51, 534.3603296279907)
+
+
+[epoch=51 eta=0.1 clips=77 updates=137] [epoch=52 eta=0.1 clips=124 updates=249] 0.46329943696
+[epoch=52 eta=0.1 clips=124 updates=250] 0.456011922413
+[epoch=52 eta=0.1 clips=148 updates=250] 0.516817169035
+[epoch=52 eta=0.1 clips=133 updates=250] 0.481808428393
+
+
+('ITER', 52, 581.2283449172974)
+
+
+[epoch=52 eta=0.1 clips=77 updates=137] [epoch=53 eta=0.1 clips=121 updates=249] 0.46557345633
+[epoch=53 eta=0.1 clips=113 updates=250] 0.446942450292
+[epoch=53 eta=0.1 clips=140 updates=250] 0.501621254211
+[epoch=53 eta=0.1 clips=139 updates=250] 0.531273694949
+
+
+('ITER', 53, 529.5661039352417)
+
+
+[epoch=53 eta=0.1 clips=75 updates=137] [epoch=54 eta=0.1 clips=119 updates=249] 0.433176461594
+[epoch=54 eta=0.1 clips=114 updates=250] 0.40730762786
+[epoch=54 eta=0.1 clips=132 updates=250] 0.526108105563
+[epoch=54 eta=0.1 clips=128 updates=250] 0.527038471461
+
+
+('ITER', 54, 599.7642545700073)
+
+
+[epoch=54 eta=0.1 clips=79 updates=137] [epoch=55 eta=0.1 clips=113 updates=249] 0.469330384062
+[epoch=55 eta=0.1 clips=109 updates=250] 0.467410747631
+[epoch=55 eta=0.1 clips=130 updates=250] 0.467866407129
+[epoch=55 eta=0.1 clips=138 updates=250] 0.509141340731
+
+
+('ITER', 55, 540.8214721679688)
+
+
+[epoch=55 eta=0.1 clips=78 updates=137] [epoch=56 eta=0.1 clips=114 updates=249] 0.448903754751
+[epoch=56 eta=0.1 clips=119 updates=250] 0.513591699559
+[epoch=56 eta=0.1 clips=123 updates=250] 0.473123100028
+[epoch=56 eta=0.1 clips=135 updates=250] 0.478962302028
+
+
+('ITER', 56, 482.5327639579773)
+
+
+[epoch=56 eta=0.1 clips=66 updates=137] [epoch=57 eta=0.1 clips=116 updates=249] 0.430950719154
+[epoch=57 eta=0.1 clips=121 updates=250] 0.469651563786
+[epoch=57 eta=0.1 clips=111 updates=250] 0.491374937129
+[epoch=57 eta=0.1 clips=133 updates=250] 0.462916550025
+
+
+('ITER', 57, 530.657958984375)
+
+
+[epoch=57 eta=0.1 clips=62 updates=137] [epoch=58 eta=0.1 clips=108 updates=249] 0.451955279584
+[epoch=58 eta=0.1 clips=114 updates=250] 0.427222061395
+[epoch=58 eta=0.1 clips=118 updates=250] 0.512717877098
+[epoch=58 eta=0.1 clips=112 updates=250] 0.470065674278
+
+
+('ITER', 58, 546.8359942436218)
+
+
+[epoch=58 eta=0.1 clips=80 updates=137] [epoch=59 eta=0.1 clips=95 updates=249] 0.442619658105
+[epoch=59 eta=0.1 clips=108 updates=250] 0.424540715864
+[epoch=59 eta=0.1 clips=111 updates=250] 0.443649660369
+[epoch=59 eta=0.1 clips=125 updates=250] 0.523818458029
+
+
+('ITER', 59, 558.3187999725342)
+
+
+[epoch=59 eta=0.1 clips=79 updates=137] [epoch=60 eta=0.1 clips=85 updates=249] 0.45238793248
+[epoch=60 eta=0.1 clips=124 updates=250] 0.47258373544
+[epoch=60 eta=0.1 clips=127 updates=250] 0.473754402296
+[epoch=60 eta=0.1 clips=107 updates=250] 0.474171985916
+
+
+('ITER', 60, 523.8060846328735)
+
+
+[epoch=60 eta=0.1 clips=63 updates=137] [epoch=61 eta=0.1 clips=107 updates=249] 0.456102632057
+[epoch=61 eta=0.1 clips=114 updates=250] 0.440516158902
+[epoch=61 eta=0.1 clips=103 updates=250] 0.435075164032
+[epoch=61 eta=0.1 clips=108 updates=250] 0.494754843353
+
+
+('ITER', 61, 562.8848285675049)
+
+
+[epoch=61 eta=0.1 clips=67 updates=137] [epoch=62 eta=0.1 clips=110 updates=249] 0.44324024461
+[epoch=62 eta=0.1 clips=90 updates=250] 0.446492561144
+[epoch=62 eta=0.1 clips=106 updates=250] 0.451120685129
+[epoch=62 eta=0.1 clips=124 updates=250] 0.495839288704
+
+
+('ITER', 62, 528.3426885604858)
+
+
+[epoch=62 eta=0.1 clips=60 updates=137] [epoch=63 eta=0.1 clips=95 updates=249] 0.442252465999
+[epoch=63 eta=0.1 clips=117 updates=250] 0.462540957188
+[epoch=63 eta=0.1 clips=109 updates=250] 0.438569516905
+[epoch=63 eta=0.1 clips=112 updates=250] 0.489475771247
+
+
+('ITER', 63, 518.491105556488)
+
+
+[epoch=63 eta=0.1 clips=57 updates=137] [epoch=64 eta=0.1 clips=101 updates=249] 0.435450451659
+[epoch=64 eta=0.1 clips=93 updates=250] 0.455031759556
+[epoch=64 eta=0.1 clips=114 updates=250] 0.437692501356
+[epoch=64 eta=0.1 clips=102 updates=250] 0.487035365127
+
+
+('ITER', 64, 501.29549741744995)
+
+
+[epoch=64 eta=0.1 clips=67 updates=137] [epoch=65 eta=0.1 clips=90 updates=249] 0.432843105396
+[epoch=65 eta=0.1 clips=93 updates=250] 0.460891172099
+[epoch=65 eta=0.1 clips=117 updates=250] 0.470427384967
+[epoch=65 eta=0.1 clips=113 updates=250] 0.477027138426
+
+
+('ITER', 65, 469.3639073371887)
+
+
+[epoch=65 eta=0.1 clips=57 updates=137] [epoch=66 eta=0.1 clips=105 updates=249] 0.418575730069
+[epoch=66 eta=0.1 clips=103 updates=250] 0.414872571942
+[epoch=66 eta=0.1 clips=107 updates=250] 0.478317950728
+[epoch=66 eta=0.1 clips=108 updates=250] 0.430034915277
+
+
+('ITER', 66, 578.3186340332031)
+
+
+[epoch=66 eta=0.1 clips=57 updates=137] [epoch=67 eta=0.1 clips=88 updates=249] 0.467592416721
+[epoch=67 eta=0.1 clips=108 updates=250] 0.432486657025
+[epoch=67 eta=0.1 clips=101 updates=250] 0.42932618906
+[epoch=67 eta=0.1 clips=122 updates=250] 0.481965485996
+
+
+('ITER', 67, 515.6685657501221)
+
+
+[epoch=67 eta=0.1 clips=52 updates=137] [epoch=68 eta=0.1 clips=82 updates=249] 0.42284940396
+[epoch=68 eta=0.1 clips=95 updates=250] 0.431947180916
+[epoch=68 eta=0.1 clips=117 updates=250] 0.484838596181
+[epoch=68 eta=0.1 clips=111 updates=250] 0.470373638349
+
+
+('ITER', 68, 529.1741099357605)
+
+
+[epoch=68 eta=0.1 clips=61 updates=137] [epoch=69 eta=0.1 clips=101 updates=249] 0.437493239926
+[epoch=69 eta=0.1 clips=104 updates=250] 0.432165389401
+[epoch=69 eta=0.1 clips=101 updates=250] 0.474591403155
+[epoch=69 eta=0.1 clips=100 updates=250] 0.478249586716
+
+
+('ITER', 69, 478.9065556526184)
+
+
+[epoch=69 eta=0.1 clips=49 updates=137] [epoch=70 eta=0.1 clips=81 updates=249] 0.412097598814
+[epoch=70 eta=0.1 clips=90 updates=250] 0.404545907059
+[epoch=70 eta=0.1 clips=104 updates=250] 0.471379000251
+[epoch=70 eta=0.1 clips=111 updates=250] 0.465074040879
+
+
+('ITER', 70, 529.6913571357727)
+
+
+[epoch=70 eta=0.1 clips=55 updates=137] [epoch=71 eta=0.1 clips=100 updates=249] 0.4542944855
+[epoch=71 eta=0.1 clips=87 updates=250] 0.422370648833
+[epoch=71 eta=0.1 clips=94 updates=250] 0.4192304675
+[epoch=71 eta=0.1 clips=101 updates=250] 0.468932475103
+
+
+('ITER', 71, 523.581705570221)
+
+
+[epoch=71 eta=0.1 clips=59 updates=137] [epoch=72 eta=0.1 clips=82 updates=249] 0.438119826987
+[epoch=72 eta=0.1 clips=86 updates=250] 0.39549718457
+[epoch=72 eta=0.1 clips=101 updates=250] 0.476085381446
+[epoch=72 eta=0.1 clips=102 updates=250] 0.459880036681
+
+
+('ITER', 72, 525.8059430122375)
+
+
+[epoch=72 eta=0.1 clips=61 updates=137] [epoch=73 eta=0.1 clips=82 updates=249] 0.429507715629
+[epoch=73 eta=0.1 clips=99 updates=250] 0.438259270598
+[epoch=73 eta=0.1 clips=95 updates=250] 0.435432321727
+[epoch=73 eta=0.1 clips=104 updates=250] 0.495969992809
+
+
+('ITER', 73, 451.64741134643555)
+
+
+[epoch=73 eta=0.1 clips=48 updates=137] [epoch=74 eta=0.1 clips=94 updates=249] 0.408557333539
+[epoch=74 eta=0.1 clips=78 updates=250] 0.429065934026
+[epoch=74 eta=0.1 clips=90 updates=250] 0.456484959807
+[epoch=74 eta=0.1 clips=97 updates=250] 0.452654576278
+
+
+('ITER', 74, 515.4167904853821)
+
+
+[epoch=74 eta=0.1 clips=63 updates=137] [epoch=75 eta=0.1 clips=88 updates=249] 0.424005884773
+[epoch=75 eta=0.1 clips=90 updates=250] 0.426277676303
+[epoch=75 eta=0.1 clips=101 updates=250] 0.438749523519
+[epoch=75 eta=0.1 clips=97 updates=250] 0.483103640097
+
+
+('ITER', 75, 492.763644695282)
+
+
+[epoch=75 eta=0.1 clips=55 updates=137] [epoch=76 eta=0.1 clips=87 updates=249] 0.410363516264
+[epoch=76 eta=0.1 clips=86 updates=250] 0.439196756995
+[epoch=76 eta=0.1 clips=107 updates=250] 0.446674707441
+[epoch=76 eta=0.1 clips=95 updates=250] 0.479400334303
+
+
+('ITER', 76, 507.1455898284912)
+
+
+[epoch=76 eta=0.1 clips=51 updates=137] [epoch=77 eta=0.1 clips=85 updates=249] 0.417362424976
+[epoch=77 eta=0.1 clips=103 updates=250] 0.42195401553
+[epoch=77 eta=0.1 clips=96 updates=250] 0.468128252767
+[epoch=77 eta=0.1 clips=91 updates=250] 0.459494339805
+
+
+('ITER', 77, 472.3718500137329)
+
+
+[epoch=77 eta=0.1 clips=51 updates=137] [epoch=78 eta=0.1 clips=79 updates=249] 0.400359220954
+[epoch=78 eta=0.1 clips=88 updates=250] 0.423016621073
+[epoch=78 eta=0.1 clips=91 updates=250] 0.468788796609
+[epoch=78 eta=0.1 clips=105 updates=250] 0.46526014325
+
+
+('ITER', 78, 474.522807598114)
+
+
+[epoch=78 eta=0.1 clips=59 updates=137] [epoch=79 eta=0.1 clips=77 updates=249] 0.402305835792
+[epoch=79 eta=0.1 clips=95 updates=250] 0.435126061633
+[epoch=79 eta=0.1 clips=96 updates=250] 0.429316439691
+[epoch=79 eta=0.1 clips=87 updates=250] 0.462104770451
+
+
+('ITER', 79, 547.496166229248)
+
+
+[epoch=79 eta=0.1 clips=55 updates=137] [epoch=80 eta=0.1 clips=76 updates=249] 0.424775462129
+[epoch=80 eta=0.1 clips=94 updates=250] 0.425976929016
+[epoch=80 eta=0.1 clips=86 updates=250] 0.43688002081
+[epoch=80 eta=0.1 clips=97 updates=250] 0.474325715985
+
+
+('ITER', 80, 473.67794036865234)
+
+
+[epoch=80 eta=0.1 clips=49 updates=137] [epoch=81 eta=0.1 clips=66 updates=249] 0.388904681815
+[epoch=81 eta=0.1 clips=85 updates=250] 0.442696694993
+[epoch=81 eta=0.1 clips=98 updates=250] 0.436109539229
+[epoch=81 eta=0.1 clips=95 updates=250] 0.4522178461
+
+
+('ITER', 81, 496.86712408065796)
+
+
+[epoch=81 eta=0.1 clips=53 updates=137] [epoch=82 eta=0.1 clips=80 updates=249] 0.430929993847
+[epoch=82 eta=0.1 clips=89 updates=250] 0.43409451899
+[epoch=82 eta=0.1 clips=89 updates=250] 0.4570151796
+[epoch=82 eta=0.1 clips=86 updates=250] 0.431865546452
+
+
+('ITER', 82, 476.44051027297974)
+
+
+[epoch=82 eta=0.1 clips=54 updates=137] [epoch=83 eta=0.1 clips=77 updates=249] 0.41425060531
+[epoch=83 eta=0.1 clips=84 updates=250] 0.411469234273
+[epoch=83 eta=0.1 clips=78 updates=250] 0.413634746417
+[epoch=83 eta=0.1 clips=95 updates=250] 0.473537327872
+
+
+('ITER', 83, 494.75345516204834)
+
+
+[epoch=83 eta=0.1 clips=59 updates=137] [epoch=84 eta=0.1 clips=69 updates=249] 0.402831614812
+[epoch=84 eta=0.1 clips=83 updates=250] 0.413727635124
+[epoch=84 eta=0.1 clips=86 updates=250] 0.449887140937
+[epoch=84 eta=0.1 clips=99 updates=250] 0.46693817275
+
+
+('ITER', 84, 503.94890451431274)
+
+
+[epoch=84 eta=0.1 clips=55 updates=137] [epoch=85 eta=0.1 clips=82 updates=249] 0.414564373799
+[epoch=85 eta=0.1 clips=86 updates=250] 0.411940669566
+[epoch=85 eta=0.1 clips=97 updates=250] 0.442351396705
+[epoch=85 eta=0.1 clips=91 updates=250] 0.453198322694
+
+
+('ITER', 85, 519.3929181098938)
+
+
+[epoch=85 eta=0.1 clips=45 updates=137] [epoch=86 eta=0.1 clips=74 updates=249] 0.406060657514
+[epoch=86 eta=0.1 clips=92 updates=250] 0.424023476178
+[epoch=86 eta=0.1 clips=88 updates=250] 0.42785487717
+[epoch=86 eta=0.1 clips=83 updates=250] 0.469151873722
+
+
+('ITER', 86, 541.7887692451477)
+
+
+[epoch=86 eta=0.1 clips=59 updates=137] [epoch=87 eta=0.1 clips=81 updates=249] 0.427161746096
+[epoch=87 eta=0.1 clips=71 updates=250] 0.420852272128
+[epoch=87 eta=0.1 clips=76 updates=250] 0.413794189919
+[epoch=87 eta=0.1 clips=99 updates=250] 0.453012933
+
+
+('ITER', 87, 516.3565254211426)
+
+
+[epoch=87 eta=0.1 clips=53 updates=137] [epoch=88 eta=0.1 clips=69 updates=249] 0.403597920886
+[epoch=88 eta=0.1 clips=80 updates=250] 0.402414476673
+[epoch=88 eta=0.1 clips=94 updates=250] 0.445209019097
+[epoch=88 eta=0.1 clips=88 updates=250] 0.454619817497
+
+
+('ITER', 88, 520.4568071365356)
+
+
+[epoch=88 eta=0.1 clips=54 updates=137] [epoch=89 eta=0.1 clips=78 updates=249] 0.436965064175
+[epoch=89 eta=0.1 clips=83 updates=250] 0.401552034096
+[epoch=89 eta=0.1 clips=76 updates=250] 0.417082147579
+[epoch=89 eta=0.1 clips=97 updates=250] 0.443456942004
+
+
+('ITER', 89, 509.07773065567017)
+
+
+[epoch=89 eta=0.1 clips=50 updates=137] [epoch=90 eta=0.1 clips=74 updates=249] 0.426366340226
+[epoch=90 eta=0.1 clips=79 updates=250] 0.411916219531
+[epoch=90 eta=0.1 clips=81 updates=250] 0.443680006943
+[epoch=90 eta=0.1 clips=97 updates=250] 0.450739597534
+
+
+('ITER', 90, 483.66994285583496)
+
+
+[epoch=90 eta=0.1 clips=55 updates=137] [epoch=91 eta=0.1 clips=71 updates=249] 0.398323886092
+[epoch=91 eta=0.1 clips=79 updates=250] 0.398251446419
+[epoch=91 eta=0.1 clips=91 updates=250] 0.453942308465
+[epoch=91 eta=0.1 clips=87 updates=250] 0.474212192307
+
+
+('ITER', 91, 446.2573399543762)
+
+
+[epoch=91 eta=0.1 clips=51 updates=137] [epoch=92 eta=0.1 clips=63 updates=249] 0.376944053244
+[epoch=92 eta=0.1 clips=88 updates=250] 0.425494858421
+[epoch=92 eta=0.1 clips=84 updates=250] 0.433417653252
+[epoch=92 eta=0.1 clips=96 updates=250] 0.469188645482
+
+
+('ITER', 92, 486.16716289520264)
+
+
+[epoch=92 eta=0.1 clips=44 updates=137] [epoch=93 eta=0.1 clips=69 updates=249] 0.410492143421
+[epoch=93 eta=0.1 clips=82 updates=250] 0.380835600242
+[epoch=93 eta=0.1 clips=95 updates=250] 0.440040064774
+[epoch=93 eta=0.1 clips=84 updates=250] 0.466276166117
+
+
+('ITER', 93, 509.7924680709839)
+
+
+[epoch=93 eta=0.1 clips=52 updates=137] [epoch=94 eta=0.1 clips=77 updates=249] 0.416591195155
+[epoch=94 eta=0.1 clips=78 updates=250] 0.401582947502
+[epoch=94 eta=0.1 clips=89 updates=250] 0.421697666614
+[epoch=94 eta=0.1 clips=79 updates=250] 0.44911222903
+
+
+('ITER', 94, 507.7093925476074)
+
+
+[epoch=94 eta=0.1 clips=51 updates=137] [epoch=95 eta=0.1 clips=67 updates=249] 0.416480864729
+[epoch=95 eta=0.1 clips=80 updates=250] 0.397937829866
+[epoch=95 eta=0.1 clips=84 updates=250] 0.438828982439
+[epoch=95 eta=0.1 clips=91 updates=250] 0.460588412564
+
+
+('ITER', 95, 471.86262130737305)
+
+
+[epoch=95 eta=0.1 clips=46 updates=137] [epoch=96 eta=0.1 clips=63 updates=249] 0.400016259511
+[epoch=96 eta=0.1 clips=86 updates=250] 0.385960747975
+[epoch=96 eta=0.1 clips=80 updates=250] 0.41853865558
+[epoch=96 eta=0.1 clips=88 updates=250] 0.492117762944
+
+
+('ITER', 96, 482.81646823883057)
+
+
+[epoch=96 eta=0.1 clips=48 updates=137] [epoch=97 eta=0.1 clips=78 updates=249] 0.411884864955
+[epoch=97 eta=0.1 clips=72 updates=250] 0.415474986725
+[epoch=97 eta=0.1 clips=72 updates=250] 0.387139312341
+[epoch=97 eta=0.1 clips=96 updates=250] 0.456510212398
+
+
+('ITER', 97, 526.9297246932983)
+
+
+[epoch=97 eta=0.1 clips=50 updates=137] [epoch=98 eta=0.1 clips=69 updates=249] 0.409642666412
+[epoch=98 eta=0.1 clips=73 updates=250] 0.405495115897
+[epoch=98 eta=0.1 clips=78 updates=250] 0.415951987329
+[epoch=98 eta=0.1 clips=83 updates=250] 0.456387331855
+
+
+('ITER', 98, 499.2706708908081)
+
+
+[epoch=98 eta=0.1 clips=50 updates=137] [epoch=99 eta=0.1 clips=64 updates=249] 0.394718920126
+[epoch=99 eta=0.1 clips=79 updates=250] 0.410494114036
+[epoch=99 eta=0.1 clips=77 updates=250] 0.454596935155
+[epoch=99 eta=0.1 clips=80 updates=250] 0.440225170204
+
+
+('ITER', 99, 493.13143587112427)
+
+
+[epoch=99 eta=0.1 clips=55 updates=137] 
