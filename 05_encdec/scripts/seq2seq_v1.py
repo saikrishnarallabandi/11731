@@ -11,6 +11,156 @@ from nltk.tokenize import RegexpTokenizer
 
 
 
+
+class Attention:
+  
+     def __init__(self, vocab_size, model, lookup):
+       self.model = model
+       #self.trainer = dy.SimpleSGDTrainer(self.model)
+       self.layers = 1
+       self.embed_size = 128
+       self.hidden_size = 128
+       self.state_size = 128
+       self.src_vocab_size = vocab_size
+       self.tgt_vocab_size = vocab_size
+       self.attention_size = 32
+       
+       self.enc_fwd_lstm = dy.LSTMBuilder(self.layers, self.embed_size, self.state_size, model)
+       self.enc_bwd_lstm = dy.LSTMBuilder(self.layers, self.embed_size,self.state_size, model)
+       self.dec_lstm = dy.LSTMBuilder(self.layers, self.state_size*2 + self.embed_size,  self.state_size, model)
+       
+       self.input_lookup = lookup
+       self.attention_w1 = model.add_parameters( (self.attention_size, self.state_size*2))
+       self.attention_w2 = model.add_parameters( (self.attention_size , self.state_size * self.layers* 2))
+       self.attention_v = model.add_parameters( (1, self.attention_size))
+       self.decoder_w = model.add_parameters( (self.src_vocab_size , self.state_size ))
+       self.decoder_b = model.add_parameters( ( self.src_vocab_size ))
+       self.output_lookup = lookup
+       self.duration_weight = model.add_parameters(( 1, self.state_size ))
+       self.duration_bias = model.add_parameters( ( 1 ))
+     
+     def run_lstm(self, init_state, input_vecs):
+            s = init_state
+            out_vectors = []
+            for vector in input_vecs:
+	       x_t = lookup(self.input_lookup, int(vector))
+               s = s.add_input(x_t)
+               out_vector = s.output()
+               out_vectors.append(out_vector)
+            return out_vectors 
+
+     def embed_sentence(self, sentence):
+          sentence = [EOS] + list(sentence) + [EOS]
+          sentence = [char2int[c] for c in sentence]
+          global input_lookup
+          return [input_lookup[char] for char in sentence]
+	
+	
+     def attend(self, input_mat, state, w1dt):
+        #global self.attention_w2
+        #global self.attention_v
+        w2 = dy.parameter(self.attention_w2)
+        v = dy.parameter(self.attention_v)
+        w2dt = w2*dy.concatenate(list(state.s()))
+        unnormalized = dy.transpose(v * dy.tanh(dy.colwise_add(w1dt, w2dt)))
+        att_weights = dy.softmax(unnormalized)
+        context = input_mat * att_weights
+        return context
+     
+     def test_duration(self, state, idx):
+        dw = dy.parameter(self.duration_weight)
+        db = dy.parameter(self.duration_bias)
+        dur = dw * state.output() + db
+        return dy.squared_norm(dur - idx)
+
+     def decode(self,  vectors, output, end_token):
+        #output = [EOS] + list(output) + [EOS]
+        #output = [char2int[c] for c in output]
+
+        w = dy.parameter(self.decoder_w)
+        b = dy.parameter(self.decoder_b)
+        w1 = dy.parameter(self.attention_w1)
+        input_mat = dy.concatenate_cols(vectors)
+        w1dt = None
+
+        last_output_embeddings = self.output_lookup[2]
+        s = self.dec_lstm.initial_state().add_input(dy.concatenate([dy.vecInput(self.state_size *2), last_output_embeddings]))
+        loss = []
+        dur_loss = []
+        c = 1
+        for word in output:
+	   c += 1
+           # w1dt can be computed and cached once for the entire decoding phase
+           w1dt = w1dt or w1 * input_mat
+           vector = dy.concatenate([self.attend(input_mat, s, w1dt), last_output_embeddings])
+           s = s.add_input(vector)
+           k = s
+           #print "Going"
+           dloss = self.test_duration(k, c)
+           #print "Back"
+           dur_loss.append(dloss)
+           out_vector = w * s.output() + b
+           probs = dy.softmax(out_vector)
+           last_output_embeddings = self.output_lookup[word]
+           loss.append(-dy.log(dy.pick(probs, word)))
+        loss = dy.esum(loss)
+        return loss, dy.esum(dur_loss)
+      
+     def generate(self, sentence):
+        #embedded = embed_sentence(in_seq)
+        encoded = self.encode_sentence(sentence)
+
+        w = dy.parameter(self.decoder_w)
+        b = dy.parameter(self.decoder_b)
+        w1 = dy.parameter(self.attention_w1)
+        input_mat = dy.concatenate_cols(encoded)
+        w1dt = None
+
+        last_output_embeddings = self.output_lookup[2]
+        s = self.dec_lstm.initial_state().add_input(dy.concatenate([dy.vecInput(self.state_size * 2), last_output_embeddings]))
+
+        out = ''
+        res = []
+        count_EOS = 0
+        for i in range(len(sentence)):
+              if count_EOS == 2: break
+              # w1dt can be computed and cached once for the entire decoding phase
+              w1dt = w1dt or w1 * input_mat
+              vector = dy.concatenate([self.attend(input_mat, s, w1dt), last_output_embeddings])
+              s = s.add_input(vector)
+              #k = s
+              #dloss = self.test_duration(k, i, b)
+              out_vector = w * s.output() + b
+              probs = dy.softmax(out_vector).vec_value()
+              next_word = probs.index(max(probs))
+              last_output_embeddings = self.output_lookup[next_word]
+              if next_word == 2:
+                  count_EOS += 1
+                  continue
+	      res.append(next_word)	
+
+              #out += int2char[next_word]
+        return res
+
+     def get_loss(self, sentence):
+        dy.renew_cg()
+        #embedded = self.embed_sentence(sentence)
+        encoded = self.encode_sentence(sentence)
+        end_token = '</s>'
+        return self.decode(encoded, sentence, end_token)
+      
+	
+     def encode_sentence(self, sentence):
+        sentence_rev = list(reversed(sentence))
+        fwd_vectors = self.run_lstm(self.enc_fwd_lstm.initial_state(), sentence)
+        bwd_vectors = self.run_lstm(self.enc_bwd_lstm.initial_state(), sentence_rev)
+        bwd_vectors = list(reversed(bwd_vectors))
+        vectors = [dy.concatenate(list(p)) for p in zip(fwd_vectors, bwd_vectors)]
+        return vectors
+
+
+
+
 class EncoderDecoder:
    
      def __init__(self, vocab_size):
@@ -273,6 +423,44 @@ class RNNEncoderDecoder:
         r_t = bias + (R * y_t)
         prob = softmax(r_t)
         return prob
+      
+    def resynth(self, sent):
+        renew_cg()
+        init_state = self.builder.initial_state()
+
+        R = parameter(self.R)
+        bias = parameter(self.bias)
+        errs = [] # will hold expressions
+        es=[]
+        state = init_state
+        for cw in sent:
+            # assume word is already a word-id
+            x_t = lookup(self.lookup, int(cw))
+            state = state.add_input(x_t)
+            y_t = state.output()
+            r_t = bias + (R * y_t)
+            err = pickneglogsoftmax(r_t, int(nw))
+            errs.append(err)
+        nerr = esum(errs)
+        #return nerr
+        
+        encoded = r_t
+        dec_state = self.builder.initial_state()
+        dec_state = self.builder.initial_state(encoded)
+        decoder_errs = []
+        
+        # Calculate losses for decoding
+	for (cw, nw) in zip(sent, sent[1:]):
+	  x_t = lookup(self.lookup, int(cw))
+	  dec_state = dec_state.add_input(x_t)
+	  y_t = dec_state.output()
+	  ystar = (R * y_t) + bias
+	  err = pickneglogsoftmax(r_t, int(nw))
+	  decoder_errs.append(err)
+	derr = esum(decoder_errs)
+	return derr      
+      
+      
     
     def sample(self, first=1, nchars=0, stop=-1):
         res = [first]

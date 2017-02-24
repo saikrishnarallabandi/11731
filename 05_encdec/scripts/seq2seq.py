@@ -6,6 +6,131 @@ from collections import defaultdict
 import dynet as dy
 
 
+class Attention:
+  
+     def __init__(self, vocab_size):
+       self.model = dy.Model()
+       self.trainer = dy.SimpleSGDTrainer(self.model)
+       self.layers = 1
+       self.embed_size = 128
+       self.hidden_size = 128
+       self.state_size = 128
+       self.src_vocab_size = vocab_size
+       self.tgt_vocab_size = vocab_size
+       
+       self.enc_fwd_lstm = dy.LSTMBuilder(self.layers, self.embed_size, self.hidden_size, self.state_size, model)
+       self.enc_bwd_lstm = dy.LSTMBuilder(self.layers, self.embed_size, self.hidden_size, self.state_size, model)
+       self.dec_lstm = dy.LSTMBuilder(self.layers, self.state_size*2 + self.embed_size,  self.state_size, model)
+       
+       self.input_lookup = model.add_lookup_parameters((self.vocab_size , self.embed_size))
+       self.attention_w1 = model.add_parameters( (self.attention_size, self.state_size*2))
+       self.attention_w2 = model.add_parameters( (self.attention_size , self.state_size * self.layers* 2))
+       self.attention_v = model.add_parameters( (1, self.attention_size))
+       self.decoder_w = model.add_parameters( (self.vocab_size , self.state_size ))
+       self.decoder_b = model.add_parameters( ( self.vocab_size ))
+       self.output_lookup = model.add_lookup_parameters(( self.vocab_size , self.embed_size ))
+     
+     def run_lstm(self, init_state, input_vecs):
+            s = init_state
+            out_vectors = []
+            for vector in input_vecs:
+               s = s.add_input(vector)
+               out_vector = s.output()
+               out_vectors.append(out_vector)
+            return out_vectors 
+
+     def embed_sentence(self, sentence):
+          sentence = [EOS] + list(sentence) + [EOS]
+          sentence = [char2int[c] for c in sentence]
+          global input_lookup
+          return [input_lookup[char] for char in sentence]
+	
+	
+     def attend(input_mat, state, w1dt):
+        global self.attention_w2
+        global self.attention_v
+        w2 = dy.parameter(self.attention_w2)
+        v = dy.parameter(self.attention_v)
+        w2dt = w2*dy.concatenate(list(state.s()))
+        unnormalized = dy.transpose(v * dy.tanh(dy.colwise_add(w1dt, w2dt)))
+        att_weights = dy.softmax(unnormalized)
+        context = input_mat * att_weights
+     return context	
+
+     def decode(dec_lstm, vectors, output):
+        output = [EOS] + list(output) + [EOS]
+        output = [char2int[c] for c in output]
+
+        w = dy.parameter(decoder_w)
+        b = dy.parameter(decoder_b)
+        w1 = dy.parameter(attention_w1)
+        input_mat = dy.concatenate_cols(vectors)
+        w1dt = None
+
+        last_output_embeddings = output_lookup[char2int[EOS]]
+        s = dec_lstm.initial_state().add_input(dy.concatenate([dy.vecInput(STATE_SIZE*2), last_output_embeddings]))
+        loss = []
+
+        for char in output:
+           # w1dt can be computed and cached once for the entire decoding phase
+           w1dt = w1dt or w1 * input_mat
+           vector = dy.concatenate([attend(input_mat, s, w1dt), last_output_embeddings])
+           s = s.add_input(vector)
+           out_vector = w * s.output() + b
+           probs = dy.softmax(out_vector)
+           last_output_embeddings = output_lookup[char]
+           loss.append(-dy.log(dy.pick(probs, char)))
+        loss = dy.esum(loss)
+        return loss
+      
+    def generate(in_seq, enc_fwd_lstm, enc_bwd_lstm, dec_lstm):
+        embedded = embed_sentence(in_seq)
+        encoded = encode_sentence(enc_fwd_lstm, enc_bwd_lstm, embedded)
+
+        w = dy.parameter(decoder_w)
+        b = dy.parameter(decoder_b)
+        w1 = dy.parameter(attention_w1)
+        input_mat = dy.concatenate_cols(encoded)
+        w1dt = None
+
+        last_output_embeddings = output_lookup[char2int[EOS]]
+        s = dec_lstm.initial_state().add_input(dy.concatenate([dy.vecInput(STATE_SIZE * 2), last_output_embeddings]))
+
+        out = ''
+        count_EOS = 0
+        for i in range(len(in_seq)*2):
+           if count_EOS == 2: break
+              # w1dt can be computed and cached once for the entire decoding phase
+              w1dt = w1dt or w1 * input_mat
+              vector = dy.concatenate([attend(input_mat, s, w1dt), last_output_embeddings])
+              s = s.add_input(vector)
+              out_vector = w * s.output() + b
+              probs = dy.softmax(out_vector).vec_value()
+              next_char = probs.index(max(probs))
+              last_output_embeddings = output_lookup[next_char]
+              if int2char[next_char] == EOS:
+                  count_EOS += 1
+                  continue
+
+              out += int2char[next_char]
+        return out
+
+    def get_loss(input_sentence, output_sentence, enc_fwd_lstm, enc_bwd_lstm, dec_lstm):
+        dy.renew_cg()
+        embedded = embed_sentence(input_sentence)
+        encoded = encode_sentence(enc_fwd_lstm, enc_bwd_lstm, embedded)
+        return decode(dec_lstm, encoded, output_sentence)
+      
+	
+     def encode_sentence(self, sentence):
+        sentence_rev = list(reversed(sentence))
+        fwd_vectors = run_lstm(self.enc_fwd_lstm.initial_state(), sentence)
+        bwd_vectors = run_lstm(self.enc_bwd_lstm.initial_state(), sentence_rev)
+        bwd_vectors = list(reversed(bwd_vectors))
+        vectors = [dy.concatenate(list(p)) for p in zip(fwd_vectors, bwd_vectors)]
+     return vectors
+
+
 class EncoderDecoder:
    
      def __init__(self, vocab_size):
