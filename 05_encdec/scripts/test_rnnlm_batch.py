@@ -4,6 +4,7 @@ from seq2seq_v1 import nnlm as LM
 from seq2seq_v1 import RNNLanguageModel_batch as RNNLM_B 
 import dynet as dy
 import time
+import math
 start = time.time()
 import random
 from dynet import *
@@ -12,6 +13,8 @@ from utils import CorpusReader as CR
 filename = '../data/en-de/train.en-de.low.en'
 #filename = '../../../../dynet-base/dynet/examples/python/written.txt'
 #filename = 'txt.done.data'
+
+
 
 cr = CR(filename)
 wids = cr.read_corpus_word(0)
@@ -23,7 +26,7 @@ num_layers = 1
 input_dim = 128
 embedding_dim = 128
 vocab_size = len(wids)
-minibatch_size = 32
+minibatch_size = 16
 M = model.add_lookup_parameters((len(wids), embedding_dim))
 builder = LSTMBuilder
 rnnlm_b =  RNNLM_B(model, num_layers, input_dim, embedding_dim, vocab_size, M, builder)
@@ -80,10 +83,13 @@ for epoch in range(100):
   if 3 > 2:  
     #print "This is a valid sentence"
     c = c+1
-    #if c%250 == 1:
+    print c, " out of ", len(train_order)
+    if c%250 == 1:
     #     #print "I will print trainer status now"
-    #     trainer.status()
-    #     print loss / words
+         trainer.status()
+         print "Loss: ", loss / words
+         print "Perplexity: ", math.exp(loss / words)
+         print ("time: %r" % (time.time() - start))
     #     #print dloss / words
     #     loss = 0
     #     words = 0
