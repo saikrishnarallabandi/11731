@@ -12,6 +12,210 @@ from nltk.tokenize import RegexpTokenizer
 
 
 
+class Attention_Batch:
+  
+     def __init__(self, src_vocab_size, tgt_vocab_size, model, state_dim, embed_size, src_lookup, tgt_lookup, builder=dy.LSTMBuilder):
+       self.model = model
+       #self.trainer = dy.SimpleSGDTrainer(self.model)
+       self.layers = 1
+       self.embed_size = 128
+       self.hidden_size = 128
+       self.state_size = 128
+       self.src_vocab_size = src_vocab_size
+       self.tgt_vocab_size = tgt_vocab_size
+       self.attention_size = 32
+       self.minibatch_size = minibatch_size
+       
+       self.enc_fwd_lstm = dy.LSTMBuilder(self.layers, self.embed_size, self.state_size, model)
+       self.enc_bwd_lstm = dy.LSTMBuilder(self.layers, self.embed_size,self.state_size, model)
+       self.dec_lstm = dy.LSTMBuilder(self.layers, self.state_size*2 + self.embed_size,  self.state_size, model)
+       
+       self.input_lookup = lookup
+       self.attention_w1 = model.add_parameters( (self.attention_size, self.state_size*2))
+       self.attention_w2 = model.add_parameters( (self.attention_size , self.state_size * self.layers* 2))
+       self.attention_v = model.add_parameters( (1, self.attention_size))
+       self.decoder_w = model.add_parameters( (self.src_vocab_size , self.state_size ))
+       self.decoder_b = model.add_parameters( ( self.src_vocab_size ))
+       self.output_lookup = lookup
+       self.duration_weight = model.add_parameters(( 1, self.state_size ))
+       self.duration_bias = model.add_parameters( ( 1 ))
+       
+     
+     def run_lstm(self, init_state, input_vecs):
+            s = init_state
+            out_vectors = []
+            for vector in input_vecs:
+	       x_t = lookup(self.input_lookup, int(vector))
+               s = s.add_input(x_t)
+               out_vector = s.output()
+               out_vectors.append(out_vector)
+            return out_vectors 
+
+     ## I am just gonna loop over them
+     def run_lstm_batch(self, init_state, input_vecs_batch):
+         out_vectors_array = []
+         for input_vecs in input_vecs_batch:
+            s = init_state
+            out_vectors = []
+            for vector in input_vecs:
+	       x_t = lookup(self.input_lookup, int(vector))
+               s = s.add_input(x_t)
+               out_vector = s.output()
+               out_vectors.append(out_vector)
+            out_vectors_array.append(out_vectors) 
+	  
+     def embed_sentence(self, sentence):
+          sentence = [EOS] + list(sentence) + [EOS]
+          sentence = [char2int[c] for c in sentence]
+          global input_lookup
+          return [input_lookup[char] for char in sentence]
+	
+     def attend_batch(self, input_mat_array, state_array, w1dt_array):
+         context_array = []
+         for input_mat, state, w1dt in zip(input_mat_array, state_array, w1dt_array):
+	   context_array.append(attend(input_mat, state, w1dt))
+	 return context_array  
+	
+	
+     def attend(self, input_mat, state, w1dt):
+        #global self.attention_w2
+        #global self.attention_v
+        w2 = dy.parameter(self.attention_w2)
+        v = dy.parameter(self.attention_v)
+        w2dt = w2*dy.concatenate(list(state.s()))
+        unnormalized = dy.transpose(v * dy.tanh(dy.colwise_add(w1dt, w2dt)))
+        att_weights = dy.softmax(unnormalized)
+        context = input_mat * att_weights
+        return context
+     
+     def test_duration(self, state, idx):
+        dw = dy.parameter(self.duration_weight)
+        db = dy.parameter(self.duration_bias)
+        dur = dw * state.output() + db
+        return dy.squared_norm(dur - idx)
+      
+     def decode_batch(self, vectors_array, output_array, end_token):
+         loss_array = []
+         for vector, output in zip(vectors_array, output_array):
+	    l = self.decode(vector, ouput, end_token)
+	    loss_array.append(l)
+	 return dy.esum(loss_array)   
+
+     def decode(self,  vectors, output, end_token):
+        #output = [EOS] + list(output) + [EOS]
+        #output = [char2int[c] for c in output]
+
+        w = dy.parameter(self.decoder_w)
+        b = dy.parameter(self.decoder_b)
+        w1 = dy.parameter(self.attention_w1)
+        input_mat = dy.concatenate_cols(vectors)
+        w1dt = None
+
+        last_output_embeddings = self.output_lookup[2]
+        s = self.dec_lstm.initial_state().add_input(dy.concatenate([dy.vecInput(self.state_size *2), last_output_embeddings]))
+        loss = []
+        dur_loss = []
+        c = 1
+        for word in output:
+	   c += 1
+           # w1dt can be computed and cached once for the entire decoding phase
+           w1dt = w1dt or w1 * input_mat
+           vector = dy.concatenate([self.attend(input_mat, s, w1dt), last_output_embeddings])
+           s = s.add_input(vector)
+           k = s
+           #print "Going"
+           dloss = self.test_duration(k, c)
+           #print "Back"
+           dur_loss.append(dloss)
+           out_vector = w * s.output() + b
+           probs = dy.softmax(out_vector)
+           last_output_embeddings = self.output_lookup[word]
+           loss.append(-dy.log(dy.pick(probs, word)))
+        loss = dy.esum(loss)
+        return loss, dy.esum(dur_loss)
+      
+     def generate(self, sentence):
+        #embedded = embed_sentence(in_seq)
+        encoded = self.encode_sentence(sentence)
+
+        w = dy.parameter(self.decoder_w)
+        b = dy.parameter(self.decoder_b)
+        w1 = dy.parameter(self.attention_w1)
+        input_mat = dy.concatenate_cols(encoded)
+        w1dt = None
+
+        last_output_embeddings = self.output_lookup[2]
+        s = self.dec_lstm.initial_state().add_input(dy.concatenate([dy.vecInput(self.state_size * 2), last_output_embeddings]))
+
+        out = ''
+        res = []
+        count_EOS = 0
+        for i in range(len(sentence)):
+              if count_EOS == 2: break
+              # w1dt can be computed and cached once for the entire decoding phase
+              w1dt = w1dt or w1 * input_mat
+              vector = dy.concatenate([self.attend(input_mat, s, w1dt), last_output_embeddings])
+              s = s.add_input(vector)
+              #k = s
+              #dloss = self.test_duration(k, i, b)
+              out_vector = w * s.output() + b
+              probs = dy.softmax(out_vector).vec_value()
+              next_word = probs.index(max(probs))
+              last_output_embeddings = self.output_lookup[next_word]
+              if next_word == 2:
+                  count_EOS += 1
+                  continue
+	      res.append(next_word)	
+
+              #out += int2char[next_word]
+        return res
+
+     def get_loss(self, sentence):
+        dy.renew_cg()
+        #embedded = self.embed_sentence(sentence)
+        encoded = self.encode_sentence(sentence)
+        end_token = '</s>'
+        return self.decode(encoded, sentence, end_token)
+      
+     def get_loss_batch(self, sentence_array):
+        dy.renew_cg()
+        #embedded = self.embed_sentence(sentence)
+        encoded_array = self.encode_sentence_batch(sentence_array)
+        end_token = '</s>'
+        return self.decode_batch(encoded_array, sentence_array, end_token)
+      
+     def encode_sentence(self, sentence):
+        sentence_rev = list(reversed(sentence))
+        fwd_vectors = self.run_lstm(self.enc_fwd_lstm.initial_state(), sentence)
+        bwd_vectors = self.run_lstm(self.enc_bwd_lstm.initial_state(), sentence_rev)
+        bwd_vectors = list(reversed(bwd_vectors))
+        vectors = [dy.concatenate(list(p)) for p in zip(fwd_vectors, bwd_vectors)]
+        return vectors
+      
+     def encode_sentence_batch(self, sentence_array):
+       vectors_array = []
+       for sentence in sentence_array:
+	   vectors_array.append(encode_sentence(sentence))
+       return vectors_array
+     
+     def encode_sentence_batch_advanced(self, sentence_array):
+        sentence_rev_array = []
+        for sent in sentence_array:
+	   sentence_rev_arrayy.append(list(reversed(sent)))
+	fwd_vectors = self.run_lstm_batch(self.enc_fwd_lstm.initial_state(), sentence_arry)
+        bwd_vectors = self.run_lstm_batch(self.enc_bwd_lstm.initial_state(), sentence_rev_array)
+        bwd_vectors_array = []
+        for v in bwd_vectors:
+	     bwd_vectors_array.append(list(reversed(v)))
+	fwd_vectors_array = fwd_vectors
+	vectors_batch = []
+	for fwd_vector, bwd_vector in zip(fwd_vectors_array, bwd_vectors_array):
+	     vector = [dy.concatenate(list(p)) for p in zip(fwd_vector, bwd_vector)]
+             vectors_batch.append(vector)   
+        return vectors_batch
+
+
+
 class Attention:
   
      def __init__(self, vocab_size, model, lookup):

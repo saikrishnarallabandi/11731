@@ -5,7 +5,7 @@ from collections import defaultdict
 
 class CorpusReader:
   
-     def __init__(self, filename):
+     def __init__(self, filename='txt.done.data'):
         self.filename = filename
         self.wids = defaultdict(lambda:  len(self.wids))
         self.wids["<unk>"] = 0
@@ -13,7 +13,8 @@ class CorpusReader:
         self.wids["</s>"] = 2
         self.wids["<S>"] = 3
         
-     def read_corpus_word(self, tokenizer_flag):
+     def read_corpus_word(self, filename, tokenizer_flag):
+       self.filename = filename
        print self.filename
        if tokenizer_flag == 1:
            tokenizer = RegexpTokenizer(r'\w+')

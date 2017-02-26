@@ -1,4 +1,4 @@
-from seq2seq_v1 import Attention as AED 
+from seq2seq_v1 import Attention_batch as AED_B
 from seq2seq_v1 import EncoderDecoder as ed
 from seq2seq_v1 import nnlm as LM
 from seq2seq_v1 import RNNLanguageModel_batch as RNNLM_B 
@@ -10,16 +10,19 @@ import random
 from dynet import *
 from utils import CorpusReader as CR
 
-filename = '../data/en-de/train.en-de.low.en'
+src_filename = '../data/en-de/train.en-de.low.de'
+tgt_filename = '../data/en-de/train.en-de.low.en'
 #filename = '../../../../dynet-base/dynet/examples/python/written.txt'
 #filename = 'txt.done.data'
 
 
 
 
-cr = CR(filename)
-wids = cr.read_corpus_word(0)
-i2w = {i:w for w,i in wids.iteritems()}
+cr = CR()
+src_wids = cr.read_corpus_word(src_filename, 0)
+tgt_wirds = cr.read_corpus_word(tgt_filename, 0)
+src_i2w = {i:w for w,i in src_wids.iteritems()}
+tgt_i2w = {i:w for w,i in tgt_wids.iteritems()}
 
 model = Model()     
 trainer = SimpleSGDTrainer(model)
@@ -28,9 +31,12 @@ input_dim = 128
 embedding_dim = 128
 vocab_size = len(wids)
 minibatch_size = 16
-M = model.add_lookup_parameters((len(wids), embedding_dim))
+
+src_lookup = model.add_lookup_parameters((len(src_wids), embedding_dim))
+tgt_lookup = model.add_lookup_parameters((len(tgt_wids), embedding_dim))
 builder = LSTMBuilder
-rnnlm_b =  RNNLM_B(model, num_layers, input_dim, embedding_dim, vocab_size, M, builder)
+minibatch_size = 32
+aed_b =  AED_B(len(src_wids), len(tgt_wids), num_layers, input_dim, embedding_dim, src_lookup, tgt_lookup, minibatch_size, builder)
 
 def get_indexed(arr):
   ret_arr = []
@@ -53,15 +59,21 @@ def get_indexed_batch(sentence_array):
 
 # Accumulate training data
 # I am using this simple version as I dont need to do tokenization for this assignment. Infact, tokenization might be bad in this case.
-sentences  = []
-f = open(filename)
+src_sentences  = []
+f = open(src_filename)
 for  line in f:
    line = line.strip()
-   sentences.append( '<s>' + ' ' + line + ' ' + '</s>')
+   src_sentences.append( '<s>' + ' ' + line + ' ' + '</s>')
+
+tgt_sentences  = []
+f = open(tgt_filename)
+for  line in f:
+   line = line.strip()
+   tgt_sentences.append( '<s>' + ' ' + line + ' ' + '</s>')
 
 # Batch the training data ##############################################
 # Sort
-
+sentences = zip(src_sentences, tgt_sentences)
 sentences.sort(key=lambda x: -len(x))
 train_order = [x*minibatch_size for x in range(int((len(sentences)-1)/minibatch_size + 1))]
 
@@ -106,7 +118,7 @@ for epoch in range(100):
     
     #print isent
     #print "I will try to calculate error now"
-    error, words_minibatch_loss = rnnlm_b.get_loss_batch(isents)
+    error, words_minibatch_loss = aed_b.get_loss_batch(isents)
     ####### I need to fix this sometime
     #print words_minibatch_indexing , words_minibatch_loss
     #assert words_minibatch_indexing == words_minibatch_loss
