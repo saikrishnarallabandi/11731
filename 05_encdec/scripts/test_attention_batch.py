@@ -1,4 +1,4 @@
-from seq2seq_v1 import Attention_batch as AED_B
+from seq2seq_v1 import Attention_Batch as AED_B
 from seq2seq_v1 import EncoderDecoder as ed
 from seq2seq_v1 import nnlm as LM
 from seq2seq_v1 import RNNLanguageModel_batch as RNNLM_B 
@@ -20,7 +20,7 @@ tgt_filename = '../data/en-de/train.en-de.low.en'
 
 cr = CR()
 src_wids = cr.read_corpus_word(src_filename, 0)
-tgt_wirds = cr.read_corpus_word(tgt_filename, 0)
+tgt_wids = cr.read_corpus_word(tgt_filename, 0)
 src_i2w = {i:w for w,i in src_wids.iteritems()}
 tgt_i2w = {i:w for w,i in tgt_wids.iteritems()}
 
@@ -29,31 +29,38 @@ trainer = SimpleSGDTrainer(model)
 num_layers = 1
 input_dim = 128
 embedding_dim = 128
-vocab_size = len(wids)
+src_vocab_size = len(src_wids)
+tgt_vocab_size = len(tgt_wids)
 minibatch_size = 16
 
 src_lookup = model.add_lookup_parameters((len(src_wids), embedding_dim))
 tgt_lookup = model.add_lookup_parameters((len(tgt_wids), embedding_dim))
 builder = LSTMBuilder
 minibatch_size = 32
-aed_b =  AED_B(len(src_wids), len(tgt_wids), num_layers, input_dim, embedding_dim, src_lookup, tgt_lookup, minibatch_size, builder)
+aed_b =  AED_B(len(src_wids), len(tgt_wids),  model, input_dim, embedding_dim, src_lookup, tgt_lookup, minibatch_size, builder)
 
-def get_indexed(arr):
+def get_indexed(arr, src_flag):
   ret_arr = []
   for a in arr:
     #print a, wids[a], M[wids[a]].value()
-    
-    ret_arr.append(wids[a])
+    if src_flag == 1:
+      ret_arr.append(src_wids[a])
+    else:
+      ret_arr.append(tgt_wids[a])
   return ret_arr  
 
 def get_indexed_batch(sentence_array):
-  ret_sent_arr = []
+  ret_ssent_arr = []
+  ret_tsent_arr  = []
   words_mb = 0
-  for sent in sentence_array:
-    ar = get_indexed(sent.split())
-    ret_sent_arr.append(ar)
-    words_mb += len(ar)
-  return ret_sent_arr, words_mb  
+  for ssent,tsent in sentence_array:
+    #print sent
+    ar_s = get_indexed(ssent.split(),1)
+    ret_ssent_arr.append(ar_s)
+    ar = get_indexed(tsent.split(),0)
+    ret_tsent_arr.append(ar)
+    words_mb += len(ar_s)
+  return ret_ssent_arr, ret_tsent_arr, words_mb  
 
 
 
@@ -114,11 +121,11 @@ for epoch in range(100):
     #         print(" ".join([i2w[c] for c in res]).strip())
     
     #words += len(sentence) - 1
-    isents, words_minibatch_indexing = get_indexed_batch(sentences[sentence_id:sentence_id+minibatch_size])
+    isents, idurs, words_minibatch_indexing = get_indexed_batch(sentences[sentence_id:sentence_id+minibatch_size])
     
     #print isent
     #print "I will try to calculate error now"
-    error, words_minibatch_loss = aed_b.get_loss_batch(isents)
+    error, words_minibatch_loss = aed_b.get_loss_batch(isents,idurs)
     ####### I need to fix this sometime
     #print words_minibatch_indexing , words_minibatch_loss
     #assert words_minibatch_indexing == words_minibatch_loss

@@ -14,7 +14,7 @@ from nltk.tokenize import RegexpTokenizer
 
 class Attention_Batch:
   
-     def __init__(self, src_vocab_size, tgt_vocab_size, model, state_dim, embed_size, src_lookup, tgt_lookup, builder=dy.LSTMBuilder):
+     def __init__(self, src_vocab_size, tgt_vocab_size, model, state_dim, embed_size, src_lookup, tgt_lookup, minibatch_size, builder=dy.LSTMBuilder):
        self.model = model
        #self.trainer = dy.SimpleSGDTrainer(self.model)
        self.layers = 1
@@ -30,13 +30,14 @@ class Attention_Batch:
        self.enc_bwd_lstm = dy.LSTMBuilder(self.layers, self.embed_size,self.state_size, model)
        self.dec_lstm = dy.LSTMBuilder(self.layers, self.state_size*2 + self.embed_size,  self.state_size, model)
        
-       self.input_lookup = lookup
+       self.input_lookup = src_lookup
+       self.output_lookup = tgt_lookup
        self.attention_w1 = model.add_parameters( (self.attention_size, self.state_size*2))
        self.attention_w2 = model.add_parameters( (self.attention_size , self.state_size * self.layers* 2))
        self.attention_v = model.add_parameters( (1, self.attention_size))
        self.decoder_w = model.add_parameters( (self.src_vocab_size , self.state_size ))
        self.decoder_b = model.add_parameters( ( self.src_vocab_size ))
-       self.output_lookup = lookup
+       #self.output_lookup = lookup
        self.duration_weight = model.add_parameters(( 1, self.state_size ))
        self.duration_bias = model.add_parameters( ( 1 ))
        
@@ -97,9 +98,9 @@ class Attention_Batch:
      def decode_batch(self, vectors_array, output_array, end_token):
          loss_array = []
          for vector, output in zip(vectors_array, output_array):
-	    l = self.decode(vector, ouput, end_token)
+	    l,t = self.decode(vector, output, end_token)
 	    loss_array.append(l)
-	 return dy.esum(loss_array)   
+	 return dy.esum(loss_array) , t  
 
      def decode(self,  vectors, output, end_token):
         #output = [EOS] + list(output) + [EOS]
@@ -132,7 +133,7 @@ class Attention_Batch:
            last_output_embeddings = self.output_lookup[word]
            loss.append(-dy.log(dy.pick(probs, word)))
         loss = dy.esum(loss)
-        return loss, dy.esum(dur_loss)
+        return loss, c
       
      def generate(self, sentence):
         #embedded = embed_sentence(in_seq)
@@ -177,12 +178,12 @@ class Attention_Batch:
         end_token = '</s>'
         return self.decode(encoded, sentence, end_token)
       
-     def get_loss_batch(self, sentence_array):
+     def get_loss_batch(self, src_sentence_array, tgt_sentence_array):
         dy.renew_cg()
         #embedded = self.embed_sentence(sentence)
-        encoded_array = self.encode_sentence_batch(sentence_array)
+        encoded_array = self.encode_sentence_batch(src_sentence_array)
         end_token = '</s>'
-        return self.decode_batch(encoded_array, sentence_array, end_token)
+        return self.decode_batch(encoded_array, tgt_sentence_array, end_token)
       
      def encode_sentence(self, sentence):
         sentence_rev = list(reversed(sentence))
@@ -195,7 +196,7 @@ class Attention_Batch:
      def encode_sentence_batch(self, sentence_array):
        vectors_array = []
        for sentence in sentence_array:
-	   vectors_array.append(encode_sentence(sentence))
+	   vectors_array.append(self.encode_sentence(sentence))
        return vectors_array
      
      def encode_sentence_batch_advanced(self, sentence_array):
