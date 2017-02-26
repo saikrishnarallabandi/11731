@@ -1,4 +1,5 @@
 from seq2seq_v1 import Attention_Batch as AED_B
+import nltk
 from seq2seq_v1 import EncoderDecoder as ed
 from seq2seq_v1 import nnlm as LM
 from seq2seq_v1 import RNNLanguageModel_batch as RNNLM_B 
@@ -15,8 +16,8 @@ tgt_filename = '../data/en-de/train.en-de.low.en'
 #filename = '../../../../dynet-base/dynet/examples/python/written.txt'
 #filename = 'txt.done.data'
 
-
-
+src_filename_test = '../data/en-de/test.en-de.low.de'
+tgt_filename_test = '../data/en-de/test.en-de.low.en'
 
 cr = CR()
 src_wids = cr.read_corpus_word(src_filename, 0)
@@ -83,7 +84,8 @@ for  line in f:
 sentences = zip(src_sentences, tgt_sentences)
 sentences.sort(key=lambda x: -len(x))
 train_order = [x*minibatch_size for x in range(int((len(sentences)-1)/minibatch_size + 1))]
-
+test_order = train_order[-1]
+train_order = train_order[:-1]
 
 
 print ("startup time: %r" % (time.time() - start))
@@ -110,6 +112,30 @@ for epoch in range(100):
          print "Loss: ", loss / words
          print "Perplexity: ", math.exp(loss / words)
          print ("time: %r" % (time.time() - start))
+         for jj in range(minibatch_size):
+	      sentence_id = jj + test_order[0]
+              isents, idurs, words_minibatch_indexing = get_indexed_batch(sentences[sentence_id:sentence_id+minibatch_size])
+              src,tgt = sentences[sentence_id]
+              resynth = aed_b.generate(src)
+              tgt_resynth = " ".join([tgt_i2w[c] for c in resynth]).strip()
+              BLEUscore = nltk.translate.bleu_score.sentence_bleu([src], tgt_resynth)
+              print "BLEU: ", BLEUscore
+         #isent = get_indexed(src_sentence, 1)
+         #itype = get_indexed(tgt_sentence,0)
+         #resynth= red.generate(isent)
+
+         #resythn = red.sample(nchars= len(sentence),stop=wids["</s>"])
+         #print(" ".join([tgt_i2w[c] for c in resynth]).strip())
+         #print '\n'
+         #durs = durs[0:5]
+         #hypothesis = resynth
+         #reference = itype
+         #BLEUscore = nltk.translate.bleu_score.sentence_bleu([reference], hypothesis)
+         #print "BLEU: ", BLEUscore
+
+         #BLEUscore = nltk.translate.bleu_score.sentence_bleu([reference], hypothesis)
+         #print "BLEU: ", BLEUscore
+
     #     #print dloss / words
     #     loss = 0
     #     words = 0
