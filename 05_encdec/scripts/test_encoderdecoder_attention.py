@@ -3,7 +3,7 @@ from seq2seq_v1 import EncoderDecoder as ed
 from seq2seq_v1 import nnlm as LM
 from seq2seq_v1 import RNNLanguageModel 
 import dynet as dy
-import random
+import random, time
 from dynet import *
 model = Model()     
 trainer = SimpleSGDTrainer(model)
@@ -36,6 +36,7 @@ for  line in f:
    line = line.strip()
    sentences.append(line)
 
+start = time.time()
 words = sents = loss = cumloss = dloss = 0
 for epoch in range(100):
  random.shuffle(sentences) 
@@ -47,7 +48,8 @@ for epoch in range(100):
     #print "This is a valid sentence"
     c = c+1
     if c%250 == 1:
-    #     #print "I will print trainer status now"
+         print "Time: ", time.time() - start
+          #     #print "I will print trainer status now"
          trainer.status()
          print loss / words
          print dloss / words

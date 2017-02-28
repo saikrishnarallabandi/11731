@@ -2,18 +2,19 @@ from seq2seq_v1 import Attention_Batch as AED_B
 from seq2seq_v1 import EncoderDecoder as ed
 from seq2seq_v1 import nnlm as LM
 from seq2seq_v1 import RNNLanguageModel_batch as RNNLM_B 
-import dynet as dy
+import nltk
+import _dynet as dy
 import time
 import math
 start = time.time()
 import random
-from dynet import *
+from _dynet import *
 from utils import CorpusReader as CR
 
-src_filename = '../data/en-de/train.en-de.low.de'
-tgt_filename = '../data/en-de/train.en-de.low.en'
+src_filename = '../data/en-de/test.en-de.low.de'
+tgt_filename = '../data/en-de/test.en-de.low.en'
 #filename = '../../../../dynet-base/dynet/examples/python/written.txt'
-#filename = 'txt.done.data'
+#src_filename = tgt_filename = 'txt.done.data'
 
 
 
@@ -92,6 +93,8 @@ print ("startup time: %r" % (time.time() - start))
 i = words = sents = loss = cumloss = dloss = 0
 for epoch in range(100):
  random.shuffle(train_order) 
+ test_order = train_order[-1]
+ train_order = train_order[:-1]
  loss = 0
  c = 1
  for sentence_id in train_order:
@@ -104,12 +107,21 @@ for epoch in range(100):
     #print "This is a valid sentence"
     c = c+1
     print c, " out of ", len(train_order)
-    if c%250 == 1:
+    #print ("time: %r" % (time.time() - start))
+    if c%5 == 1:
     #     #print "I will print trainer status now"
-         trainer.status()
+         #trainer.status()
          print "Loss: ", loss / words
          print "Perplexity: ", math.exp(loss / words)
          print ("time: %r" % (time.time() - start))
+	 sentence_id = random.randint(0,9) + test_order
+         isents, idurs, words_minibatch_indexing = get_indexed_batch(sentences[sentence_id:sentence_id+minibatch_size])
+         src,tgt = sentences[sentence_id]
+         isrc = get_indexed(src.split(),1)
+         resynth = aed_b.generate(isrc)
+         tgt_resynth = " ".join([tgt_i2w[cc] for cc in resynth]).strip()
+         BLEUscore = nltk.translate.bleu_score.sentence_bleu([src], tgt_resynth)
+         print "BLEU: ", BLEUscore
     #     #print dloss / words
     #     loss = 0
     #     words = 0
@@ -138,7 +150,9 @@ for epoch in range(100):
     trainer.update(1.0)
  print '\n'   
  print("ITER",epoch,loss)
+ print ("time: %r" % (time.time() - start))
  print '\n'
+ 
  trainer.status()
  trainer.update_epoch(1)
     

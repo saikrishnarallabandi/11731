@@ -3,8 +3,8 @@ import cPickle, pickle
 import numpy as np
 import os
 from collections import defaultdict
-import dynet as dy
-from dynet import *
+import _gdynet as dy
+from _gdynet import *
 import numpy
 import random
 from nltk.tokenize import RegexpTokenizer 

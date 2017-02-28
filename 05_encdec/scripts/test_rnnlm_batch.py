@@ -2,15 +2,15 @@ from seq2seq_v1 import Attention as AED
 from seq2seq_v1 import EncoderDecoder as ed
 from seq2seq_v1 import nnlm as LM
 from seq2seq_v1 import RNNLanguageModel_batch as RNNLM_B 
-import dynet as dy
+import _gdynet as dy
 import time
 import math
 start = time.time()
 import random
-from dynet import *
+from _gdynet import *
 from utils import CorpusReader as CR
 
-filename = '../data/en-de/train.en-de.low.en'
+filename = '../data/en-de/test.en-de.low.en'
 #filename = '../../../../dynet-base/dynet/examples/python/written.txt'
 #filename = 'txt.done.data'
 
@@ -18,7 +18,7 @@ filename = '../data/en-de/train.en-de.low.en'
 
 
 cr = CR(filename)
-wids = cr.read_corpus_word(0)
+wids = cr.read_corpus_word(filename, 0)
 i2w = {i:w for w,i in wids.iteritems()}
 
 model = Model()     
@@ -84,13 +84,17 @@ for epoch in range(100):
   if 3 > 2:  
     #print "This is a valid sentence"
     c = c+1
-    print c, " out of ", len(train_order)
-    if c%250 == 1:
+    #print c, " out of ", len(train_order)
+    if c%5 == 1:
     #     #print "I will print trainer status now"
          trainer.status()
-         print "Loss: ", loss / words
-         print "Perplexity: ", math.exp(loss / words)
-         print ("time: %r" % (time.time() - start))
+ 	 sentence_id = jj + test_order
+         isents, idurs, words_minibatch_indexing = get_indexed_batch(sentences[sentence_id:sentence_id+minibatch_size])
+         src,tgt = sentences[sentence_id]
+         resynth = aed_b.generate(src)
+         tgt_resynth = " ".join([tgt_i2w[c] for c in resynth]).strip()
+         BLEUscore = nltk.translate.bleu_score.sentence_bleu([src], tgt_resynth)
+         print "BLEU: ", BLEUscore
     #     #print dloss / words
     #     loss = 0
     #     words = 0
@@ -120,6 +124,7 @@ for epoch in range(100):
  print '\n'   
  print("ITER",epoch,loss)
  print '\n'
+ print ("time: %r" % (time.time() - start))
  trainer.status()
  trainer.update_epoch(1)
     
