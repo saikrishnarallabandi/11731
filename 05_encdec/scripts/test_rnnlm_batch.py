@@ -18,7 +18,7 @@ filename = '../data/en-de/train.en-de.low.en'
 
 
 cr = CR(filename)
-wids = cr.read_corpus_word(0)
+wids = cr.read_corpus_word(filename, 0)
 i2w = {i:w for w,i in wids.iteritems()}
 
 model = Model()     
@@ -27,7 +27,7 @@ num_layers = 1
 input_dim = 128
 embedding_dim = 128
 vocab_size = len(wids)
-minibatch_size = 16
+minibatch_size = 64
 M = model.add_lookup_parameters((len(wids), embedding_dim))
 builder = LSTMBuilder
 rnnlm_b =  RNNLM_B(model, num_layers, input_dim, embedding_dim, vocab_size, M, builder)
@@ -84,8 +84,8 @@ for epoch in range(100):
   if 3 > 2:  
     #print "This is a valid sentence"
     c = c+1
-    print c, " out of ", len(train_order)
-    if c%250 == 1:
+    #print c, " out of ", len(train_order)
+    if c%50 == 1:
     #     #print "I will print trainer status now"
          trainer.status()
          print "Loss: ", loss / words

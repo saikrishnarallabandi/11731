@@ -94,6 +94,8 @@ print ("startup time: %r" % (time.time() - start))
 i = words = sents = loss = cumloss = dloss = 0
 for epoch in range(100):
  random.shuffle(train_order) 
+ test_order = train_order[-1]
+ train_order = train_order[:-1]
  loss = 0
  c = 1
  for sentence_id in train_order:
@@ -106,18 +108,19 @@ for epoch in range(100):
     #print "This is a valid sentence"
     c = c+1
     print c, " out of ", len(train_order)
-    if c%250 == 1:
+    if c%5 == 1:
     #     #print "I will print trainer status now"
+         print c, " out of ", len(train_order)    
          trainer.status()
          print "Loss: ", loss / words
          print "Perplexity: ", math.exp(loss / words)
          print ("time: %r" % (time.time() - start))
          for jj in range(minibatch_size):
-	      sentence_id = jj + test_order[0]
+	      sentence_id = random.randint(0,9) + test_order
               isents, idurs, words_minibatch_indexing = get_indexed_batch(sentences[sentence_id:sentence_id+minibatch_size])
               src,tgt = sentences[sentence_id]
               resynth = aed_b.generate(src)
-              tgt_resynth = " ".join([tgt_i2w[c] for c in resynth]).strip()
+              tgt_resynth = " ".join([tgt_i2w[cc] for cc in resynth]).strip()
               BLEUscore = nltk.translate.bleu_score.sentence_bleu([src], tgt_resynth)
               print "BLEU: ", BLEUscore
          #isent = get_indexed(src_sentence, 1)

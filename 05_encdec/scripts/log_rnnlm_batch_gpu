@@ -1,0 +1,29 @@
+nohup: ignoring input
+[dynet] random seed: 178162836
+[dynet] allocating memory: 10000MB
+[dynet] memory allocation done.
+../data/en-de/train.en-de.low.en
+startup time: 0.5383200645446777
+[epoch=0 eta=0.1 clips=49 updates=49] Loss:  8.11500896548
+Perplexity:  3344.28756718
+time: 73.26302218437195
+[epoch=0 eta=0.1 clips=50 updates=50] Loss:  7.40372449911
+Perplexity:  1642.08901376
+time: 126.76812314987183
+[epoch=0 eta=0.1 clips=50 updates=50] Loss:  7.02980338754
+Perplexity:  1129.80845392
+time: 187.815199136734
+[epoch=0 eta=0.1 clips=50 updates=50] Loss:  6.78772451573
+Perplexity:  886.893152579
+time: 240.32127904891968
+[epoch=0 eta=0.1 clips=50 updates=50] Loss:  6.64062163109
+Perplexity:  765.570747709
+time: 305.16375517845154
+[epoch=0 eta=0.1 clips=50 updates=50] Loss:  6.51736670599
+Perplexity:  676.793839592
+time: 362.0343110561371
+[epoch=0 eta=0.1 clips=50 updates=50] terminate called after throwing an instance of 'std::runtime_error'
+  what():  CPU forward memory is out of memory, try increasing with --dynet-mem (current capacity: 3494903808). See http://dynet.readthedocs.io/en/latest/commandline.html for details.
+Loss:  6.42230784633
+Perplexity:  615.421775354
+time: 417.5677921772003
