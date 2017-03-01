@@ -1,0 +1,1486 @@
+nohup: ignoring input
+[dynet] random seed: 1179651889
+[dynet] allocating memory: 1800MB
+[dynet] memory allocation done.
+/usr/local/lib/python2.7/dist-packages/nltk/translate/bleu_score.py:472: UserWarning: 
+Corpus/Sentence contains 0 counts of 4-gram overlaps.
+BLEU scores might be undesirable; use SmoothingFunction().
+  warnings.warn(_msg)
+../data/en-de/test.en-de.low.de
+../data/en-de/test.en-de.low.en
+startup time: 0.0959780216217041
+2  out of  48
+3  out of  48
+4  out of  48
+5  out of  48
+6  out of  48
+Loss:  9.38813782457
+Perplexity:  11945.8333697
+time: 7.841529846191406
+BLEU:  0
+7  out of  48
+8  out of  48
+9  out of  48
+10  out of  48
+11  out of  48
+Loss:  9.12019989254
+Perplexity:  9138.02805748
+time: 21.297675848007202
+BLEU:  0.0328864797084
+12  out of  48
+13  out of  48
+14  out of  48
+15  out of  48
+16  out of  48
+Loss:  8.67853861739
+Perplexity:  5875.454028
+time: 35.373806953430176
+BLEU:  0.0357732215661
+17  out of  48
+18  out of  48
+19  out of  48
+20  out of  48
+21  out of  48
+Loss:  8.32006711436
+Perplexity:  4105.43553273
+time: 48.24997282028198
+BLEU:  0.0117745780443
+22  out of  48
+23  out of  48
+24  out of  48
+25  out of  48
+26  out of  48
+Loss:  8.0287544353
+Perplexity:  3067.91800209
+time: 61.60088896751404
+BLEU:  0.115380376181
+27  out of  48
+28  out of  48
+29  out of  48
+30  out of  48
+31  out of  48
+Loss:  7.77447811321
+Perplexity:  2379.10135449
+time: 75.4663598537445
+BLEU:  1.23510341424e-07
+32  out of  48
+33  out of  48
+34  out of  48
+35  out of  48
+36  out of  48
+Loss:  7.63311455653
+Perplexity:  2065.47304477
+time: 88.72847580909729
+BLEU:  0.0092220696856
+37  out of  48
+38  out of  48
+39  out of  48
+40  out of  48
+41  out of  48
+Loss:  7.50266090495
+Perplexity:  1812.85985
+time: 103.26161885261536
+BLEU:  0.0146989715361
+42  out of  48
+43  out of  48
+44  out of  48
+45  out of  48
+46  out of  48
+Loss:  7.40230949549
+Perplexity:  1639.76709501
+time: 116.6919469833374
+BLEU:  0.0117821279134
+47  out of  48
+48  out of  48
+49  out of  48
+
+
+('ITER', 0, 238028.93334960938)
+time: 126.27842283248901
+
+
+[epoch=0 eta=0.1 clips=48 updates=48] 2  out of  47
+3  out of  47
+4  out of  47
+5  out of  47
+6  out of  47
+Loss:  0.441323504071
+Perplexity:  1.55476359335
+time: 135.8028450012207
+BLEU:  0.049131668367
+7  out of  47
+8  out of  47
+9  out of  47
+10  out of  47
+11  out of  47
+Loss:  1.00732618844
+Perplexity:  2.73826960107
+time: 149.9317078590393
+BLEU:  0.058699284808
+12  out of  47
+13  out of  47
+14  out of  47
+15  out of  47
+16  out of  47
+Loss:  1.46416628504
+Perplexity:  4.32393680633
+time: 164.70192289352417
+BLEU:  0.0227747925347
+17  out of  47
+18  out of  47
+19  out of  47
+20  out of  47
+21  out of  47
+Loss:  1.86938456434
+Perplexity:  6.48430449883
+time: 179.45118284225464
+BLEU:  0.0280227451584
+22  out of  47
+23  out of  47
+24  out of  47
+25  out of  47
+26  out of  47
+Loss:  2.13399686162
+Perplexity:  8.44856717261
+time: 191.14762997627258
+BLEU:  0.0390918419096
+27  out of  47
+28  out of  47
+29  out of  47
+30  out of  47
+31  out of  47
+Loss:  2.4419284531
+Perplexity:  11.4951873113
+time: 205.65961599349976
+BLEU:  0.0380516320771
+32  out of  47
+33  out of  47
+34  out of  47
+35  out of  47
+36  out of  47
+Loss:  2.67801510453
+Perplexity:  14.5561721225
+time: 219.0632779598236
+BLEU:  0.00451822801202
+37  out of  47
+38  out of  47
+39  out of  47
+40  out of  47
+41  out of  47
+Loss:  2.84517016699
+Perplexity:  17.2044860555
+time: 230.58781099319458
+BLEU:  1.58903573129e-05
+42  out of  47
+43  out of  47
+44  out of  47
+45  out of  47
+46  out of  47
+Loss:  3.05465880344
+Perplexity:  21.2139461665
+time: 245.03163290023804
+BLEU:  7.1935520542e-08
+47  out of  47
+48  out of  47
+
+
+('ITER', 1, 205838.02612304688)
+time: 252.8203628063202
+
+
+[epoch=1 eta=0.1 clips=47 updates=47] 2  out of  46
+3  out of  46
+4  out of  46
+5  out of  46
+6  out of  46
+Loss:  0.238028421391
+Perplexity:  1.26874525182
+time: 262.8021709918976
+BLEU:  0.000168508318002
+7  out of  46
+8  out of  46
+9  out of  46
+10  out of  46
+11  out of  46
+Loss:  0.51479967378
+Perplexity:  1.6733032617
+time: 275.44846200942993
+BLEU:  5.32145986042e-08
+12  out of  46
+13  out of  46
+14  out of  46
+15  out of  46
+16  out of  46
+Loss:  0.786074502077
+Perplexity:  2.19476395262
+time: 289.3052439689636
+BLEU:  0.0183950746894
+17  out of  46
+18  out of  46
+19  out of  46
+20  out of  46
+21  out of  46
+Loss:  1.02390049939
+Perplexity:  2.78403273146
+time: 302.4352238178253
+BLEU:  8.02525097483e-05
+22  out of  46
+23  out of  46
+24  out of  46
+25  out of  46
+26  out of  46
+Loss:  1.21205388721
+Perplexity:  3.36037940989
+time: 313.9832978248596
+BLEU:  0.000175167177109
+27  out of  46
+28  out of  46
+29  out of  46
+30  out of  46
+31  out of  46
+Loss:  1.42247870008
+Perplexity:  4.14738784066
+time: 327.6707019805908
+BLEU:  3.83032873885e-07
+32  out of  46
+33  out of  46
+34  out of  46
+35  out of  46
+36  out of  46
+Loss:  1.60536317001
+Perplexity:  4.97966774037
+time: 341.0354928970337
+BLEU:  0.043340719586
+37  out of  46
+38  out of  46
+39  out of  46
+40  out of  46
+41  out of  46
+Loss:  1.75472924653
+Perplexity:  5.78188206537
+time: 353.213791847229
+BLEU:  0.0309564538157
+42  out of  46
+43  out of  46
+44  out of  46
+45  out of  46
+46  out of  46
+Loss:  1.91283444162
+Perplexity:  6.77225718748
+time: 366.4495589733124
+BLEU:  0.00281761645535
+47  out of  46
+
+
+('ITER', 2, 192667.1982421875)
+time: 373.1392648220062
+
+
+[epoch=2 eta=0.1 clips=46 updates=46] 2  out of  45
+3  out of  45
+4  out of  45
+5  out of  45
+6  out of  45
+Loss:  0.146465458928
+Perplexity:  1.15773494072
+time: 382.5969398021698
+BLEU:  0.0226655253946
+7  out of  45
+8  out of  45
+9  out of  45
+10  out of  45
+11  out of  45
+Loss:  0.341551837837
+Perplexity:  1.40712953397
+time: 395.7948808670044
+BLEU:  0.0274526420376
+12  out of  45
+13  out of  45
+14  out of  45
+15  out of  45
+16  out of  45
+Loss:  0.508870576122
+Perplexity:  1.66341143703
+time: 407.92403197288513
+BLEU:  0.0805493722457
+17  out of  45
+18  out of  45
+19  out of  45
+20  out of  45
+21  out of  45
+Loss:  0.650611485789
+Perplexity:  1.91671251321
+time: 419.18316888809204
+BLEU:  0.000288242193998
+22  out of  45
+23  out of  45
+24  out of  45
+25  out of  45
+26  out of  45
+Loss:  0.803832860114
+Perplexity:  2.23408748396
+time: 431.4242479801178
+BLEU:  0.0252657340889
+27  out of  45
+28  out of  45
+29  out of  45
+30  out of  45
+31  out of  45
+Loss:  0.966566421816
+Perplexity:  2.628902403
+time: 445.4308738708496
+BLEU:  5.13124443046e-06
+32  out of  45
+33  out of  45
+34  out of  45
+35  out of  45
+36  out of  45
+Loss:  1.11561586635
+Perplexity:  3.05144688407
+time: 459.1254699230194
+BLEU:  0.0218443153179
+37  out of  45
+38  out of  45
+39  out of  45
+40  out of  45
+41  out of  45
+Loss:  1.25627164371
+Perplexity:  3.51230193238
+time: 472.79602885246277
+BLEU:  0.119975611234
+42  out of  45
+43  out of  45
+44  out of  45
+45  out of  45
+46  out of  45
+Loss:  1.36991353042
+Perplexity:  3.93501042208
+time: 484.8698649406433
+BLEU:  3.28985798414e-11
+
+
+('ITER', 3, 177138.37866210938)
+time: 487.38762879371643
+
+
+[epoch=3 eta=0.1 clips=45 updates=45] 2  out of  44
+3  out of  44
+4  out of  44
+5  out of  44
+6  out of  44
+Loss:  0.158699491624
+Perplexity:  1.17198570224
+time: 500.3905909061432
+BLEU:  0.0580315515701
+7  out of  44
+8  out of  44
+9  out of  44
+10  out of  44
+11  out of  44
+Loss:  0.303425210374
+Perplexity:  1.35449028533
+time: 513.195170879364
+BLEU:  0.0394662364233
+12  out of  44
+13  out of  44
+14  out of  44
+15  out of  44
+16  out of  44
+Loss:  0.425441396294
+Perplexity:  1.53026572423
+time: 524.6934559345245
+BLEU:  0.0580315515701
+17  out of  44
+18  out of  44
+19  out of  44
+20  out of  44
+21  out of  44
+Loss:  0.532392198887
+Perplexity:  1.70300135764
+time: 535.4967589378357
+BLEU:  0.0584437774911
+22  out of  44
+23  out of  44
+24  out of  44
+25  out of  44
+26  out of  44
+Loss:  0.641345051179
+Perplexity:  1.89903345944
+time: 546.7542889118195
+BLEU:  5.11975599726e-07
+27  out of  44
+28  out of  44
+29  out of  44
+30  out of  44
+31  out of  44
+Loss:  0.763006747988
+Perplexity:  2.14471515349
+time: 559.4977610111237
+BLEU:  0.0204883163405
+32  out of  44
+33  out of  44
+34  out of  44
+35  out of  44
+36  out of  44
+Loss:  0.866865554923
+Perplexity:  2.3794409257
+time: 571.1610360145569
+BLEU:  0.00494348973983
+37  out of  44
+38  out of  44
+39  out of  44
+40  out of  44
+41  out of  44
+Loss:  0.977316379833
+Perplexity:  2.65731543931
+time: 584.1308789253235
+BLEU:  0.0605606120689
+42  out of  44
+43  out of  44
+44  out of  44
+45  out of  44
+
+
+('ITER', 4, 170410.90307617188)
+time: 597.5644328594208
+
+
+[epoch=4 eta=0.1 clips=44 updates=44] 2  out of  43
+3  out of  43
+4  out of  43
+5  out of  43
+6  out of  43
+Loss:  0.109010178041
+Perplexity:  1.11517370057
+time: 608.7301528453827
+BLEU:  0.10767322665
+7  out of  43
+8  out of  43
+9  out of  43
+10  out of  43
+11  out of  43
+Loss:  0.22370752866
+Perplexity:  1.25070517051
+time: 621.2002048492432
+BLEU:  0.0505758157693
+12  out of  43
+13  out of  43
+14  out of  43
+15  out of  43
+16  out of  43
+Loss:  0.345001610138
+Perplexity:  1.41199219317
+time: 634.6515009403229
+BLEU:  0.0162553335821
+17  out of  43
+18  out of  43
+19  out of  43
+20  out of  43
+21  out of  43
+Loss:  0.446478350874
+Perplexity:  1.56279885396
+time: 646.7386319637299
+BLEU:  0.108090323306
+22  out of  43
+23  out of  43
+24  out of  43
+25  out of  43
+26  out of  43
+Loss:  0.525840038415
+Perplexity:  1.69187949537
+time: 656.9523899555206
+BLEU:  0.0488915799663
+27  out of  43
+28  out of  43
+29  out of  43
+30  out of  43
+31  out of  43
+Loss:  0.634345055976
+Perplexity:  1.88578665222
+time: 670.2460589408875
+BLEU:  0.0256069244299
+32  out of  43
+33  out of  43
+34  out of  43
+35  out of  43
+36  out of  43
+Loss:  0.729372927627
+Perplexity:  2.07377978985
+time: 682.9614930152893
+BLEU:  0.0524885766664
+37  out of  43
+38  out of  43
+39  out of  43
+40  out of  43
+41  out of  43
+Loss:  0.830972589992
+Perplexity:  2.29555028413
+time: 696.8387529850006
+BLEU:  0.0524885766664
+42  out of  43
+43  out of  43
+44  out of  43
+
+
+('ITER', 5, 165674.89306640625)
+time: 705.9864099025726
+
+
+[epoch=5 eta=0.1 clips=43 updates=43] 2  out of  42
+3  out of  42
+4  out of  42
+5  out of  42
+6  out of  42
+Loss:  0.0953417796521
+Perplexity:  1.10003476038
+time: 717.5415580272675
+BLEU:  0.00406868012278
+7  out of  42
+8  out of  42
+9  out of  42
+10  out of  42
+11  out of  42
+Loss:  0.190789047108
+Perplexity:  1.21020412909
+time: 729.9595749378204
+BLEU:  0.0535786933894
+12  out of  42
+13  out of  42
+14  out of  42
+15  out of  42
+16  out of  42
+Loss:  0.282871340435
+Perplexity:  1.32693442803
+time: 742.7307069301605
+BLEU:  0.205259638306
+17  out of  42
+18  out of  42
+19  out of  42
+20  out of  42
+21  out of  42
+Loss:  0.370438948641
+Perplexity:  1.4483702353
+time: 754.7514719963074
+BLEU:  0.07929105617
+22  out of  42
+23  out of  42
+24  out of  42
+25  out of  42
+26  out of  42
+Loss:  0.461928573468
+Perplexity:  1.58713193585
+time: 768.0448548793793
+BLEU:  0.0880114186136
+27  out of  42
+28  out of  42
+29  out of  42
+30  out of  42
+31  out of  42
+Loss:  0.540961516872
+Perplexity:  1.71765762523
+time: 779.9714119434357
+BLEU:  5.36503443757e-09
+32  out of  42
+33  out of  42
+34  out of  42
+35  out of  42
+36  out of  42
+Loss:  0.635329670765
+Perplexity:  1.88764434005
+time: 793.8314809799194
+BLEU:  0.202060768174
+37  out of  42
+38  out of  42
+39  out of  42
+40  out of  42
+41  out of  42
+Loss:  0.715089928208
+Perplexity:  2.04437052057
+time: 806.9248008728027
+BLEU:  0.0477319004303
+42  out of  42
+43  out of  42
+
+
+('ITER', 6, 164059.4599609375)
+time: 815.3094367980957
+
+
+[epoch=6 eta=0.1 clips=42 updates=42] 2  out of  41
+3  out of  41
+4  out of  41
+5  out of  41
+6  out of  41
+Loss:  0.0754931108128
+Perplexity:  1.07841579828
+time: 826.1609020233154
+BLEU:  0.00828339327197
+7  out of  41
+8  out of  41
+9  out of  41
+10  out of  41
+11  out of  41
+Loss:  0.15903496525
+Perplexity:  1.17237893849
+time: 838.6517119407654
+BLEU:  0.0754796941315
+12  out of  41
+13  out of  41
+14  out of  41
+15  out of  41
+16  out of  41
+Loss:  0.247406191416
+Perplexity:  1.28069921617
+time: 852.7204458713531
+BLEU:  0.0271020185439
+17  out of  41
+18  out of  41
+19  out of  41
+20  out of  41
+21  out of  41
+Loss:  0.335071718939
+Perplexity:  1.39804064762
+time: 867.1816139221191
+BLEU:  0.0532680325041
+22  out of  41
+23  out of  41
+24  out of  41
+25  out of  41
+26  out of  41
+Loss:  0.400191708807
+Perplexity:  1.49211072099
+time: 877.958930015564
+BLEU:  0.0554328691615
+27  out of  41
+28  out of  41
+29  out of  41
+30  out of  41
+31  out of  41
+Loss:  0.460225188091
+Perplexity:  1.58443073976
+time: 888.506520986557
+BLEU:  0.0220808281161
+32  out of  41
+33  out of  41
+34  out of  41
+35  out of  41
+36  out of  41
+Loss:  0.528925316238
+Perplexity:  1.69710747439
+time: 900.4501338005066
+BLEU:  0.031876413146
+37  out of  41
+38  out of  41
+39  out of  41
+40  out of  41
+41  out of  41
+Loss:  0.611290701672
+Perplexity:  1.84280838032
+time: 915.4940509796143
+BLEU:  0.0783126583549
+42  out of  41
+
+
+('ITER', 7, 153651.63403320312)
+time: 920.5933268070221
+
+
+[epoch=7 eta=0.1 clips=41 updates=41] 2  out of  40
+3  out of  40
+4  out of  40
+5  out of  40
+6  out of  40
+Loss:  0.0500925027218
+Perplexity:  1.05136834631
+time: 929.600672006607
+BLEU:  1.75355001858e-06
+7  out of  40
+8  out of  40
+9  out of  40
+10  out of  40
+11  out of  40
+Loss:  0.128736237428
+Perplexity:  1.13739008366
+time: 943.4092919826508
+BLEU:  0.0363417996115
+12  out of  40
+13  out of  40
+14  out of  40
+15  out of  40
+16  out of  40
+Loss:  0.211510429308
+Perplexity:  1.23554285142
+time: 957.7096908092499
+BLEU:  0.000162812758067
+17  out of  40
+18  out of  40
+19  out of  40
+20  out of  40
+21  out of  40
+Loss:  0.290097383296
+Perplexity:  1.33655764008
+time: 971.6118669509888
+BLEU:  0.00144939217631
+22  out of  40
+23  out of  40
+24  out of  40
+25  out of  40
+26  out of  40
+Loss:  0.361963982858
+Perplexity:  1.43614721511
+time: 984.4245200157166
+BLEU:  0.0101944351195
+27  out of  40
+28  out of  40
+29  out of  40
+30  out of  40
+31  out of  40
+Loss:  0.446713868606
+Perplexity:  1.56316696415
+time: 999.8129420280457
+BLEU:  0.0408956624482
+32  out of  40
+33  out of  40
+34  out of  40
+35  out of  40
+36  out of  40
+Loss:  0.524627391804
+Perplexity:  1.68982908689
+time: 1014.5028259754181
+BLEU:  0.0476607507215
+37  out of  40
+38  out of  40
+39  out of  40
+40  out of  40
+41  out of  40
+Loss:  0.618417796251
+Perplexity:  1.85598916449
+time: 1031.850333929062
+BLEU:  0.0228146813201
+
+
+('ITER', 8, 173345.71069335938)
+time: 1035.7035830020905
+
+
+[epoch=8 eta=0.1 clips=40 updates=40] 2  out of  39
+3  out of  39
+4  out of  39
+5  out of  39
+6  out of  39
+Loss:  0.0573999740058
+Perplexity:  1.05907932989
+time: 1046.0881369113922
+BLEU:  0.072012600845
+7  out of  39
+8  out of  39
+9  out of  39
+10  out of  39
+11  out of  39
+Loss:  0.138374881206
+Perplexity:  1.14840598541
+time: 1060.864343881607
+BLEU:  0.0369514286821
+12  out of  39
+13  out of  39
+14  out of  39
+15  out of  39
+16  out of  39
+Loss:  0.207345889851
+Perplexity:  1.23040808386
+time: 1074.7640697956085
+BLEU:  0.00596357640924
+17  out of  39
+18  out of  39
+19  out of  39
+20  out of  39
+21  out of  39
+Loss:  0.270731294716
+Perplexity:  1.31092277118
+time: 1087.512048959732
+BLEU:  0.0469231443799
+22  out of  39
+23  out of  39
+24  out of  39
+25  out of  39
+26  out of  39
+Loss:  0.334066651324
+Perplexity:  1.39663622813
+time: 1100.505658864975
+BLEU:  0.0107561465496
+27  out of  39
+28  out of  39
+29  out of  39
+30  out of  39
+31  out of  39
+Loss:  0.397511064669
+Perplexity:  1.48811625939
+time: 1113.7839958667755
+BLEU:  0.0163096125307
+32  out of  39
+33  out of  39
+34  out of  39
+35  out of  39
+36  out of  39
+Loss:  0.457211107922
+Perplexity:  1.57966232828
+time: 1126.585317850113
+BLEU:  0.0776459499221
+37  out of  39
+38  out of  39
+39  out of  39
+40  out of  39
+
+
+('ITER', 9, 152790.60229492188)
+time: 1138.8296699523926
+
+
+[epoch=9 eta=0.1 clips=39 updates=39] 2  out of  38
+3  out of  38
+4  out of  38
+5  out of  38
+6  out of  38
+Loss:  0.0464217482581
+Perplexity:  1.0475161059
+time: 1148.4025039672852
+BLEU:  0.101169056809
+7  out of  38
+8  out of  38
+9  out of  38
+10  out of  38
+11  out of  38
+Loss:  0.105973015653
+Perplexity:  1.11179187512
+time: 1160.6396508216858
+BLEU:  0.131197195545
+12  out of  38
+13  out of  38
+14  out of  38
+15  out of  38
+16  out of  38
+Loss:  0.161847005887
+Perplexity:  1.17568035539
+time: 1172.4198758602142
+BLEU:  0.0707183499853
+17  out of  38
+18  out of  38
+19  out of  38
+20  out of  38
+21  out of  38
+Loss:  0.220755451249
+Perplexity:  1.24701843647
+time: 1185.12890291214
+BLEU:  0.0832076997002
+22  out of  38
+23  out of  38
+24  out of  38
+25  out of  38
+26  out of  38
+Loss:  0.281684675153
+Perplexity:  1.32536073492
+time: 1197.9005019664764
+BLEU:  0.0198308149019
+27  out of  38
+28  out of  38
+29  out of  38
+30  out of  38
+31  out of  38
+Loss:  0.339925261644
+Perplexity:  1.40484259101
+time: 1210.8502328395844
+BLEU:  0.0729298914737
+32  out of  38
+33  out of  38
+34  out of  38
+35  out of  38
+36  out of  38
+Loss:  0.387013157205
+Perplexity:  1.47257586613
+time: 1221.839034795761
+BLEU:  0.0594567225084
+37  out of  38
+38  out of  38
+39  out of  38
+
+
+('ITER', 10, 138428.24584960938)
+time: 1231.6859378814697
+
+
+[epoch=10 eta=0.1 clips=38 updates=38] 2  out of  37
+3  out of  37
+4  out of  37
+5  out of  37
+6  out of  37
+Loss:  0.0393696793108
+Perplexity:  1.04015493634
+time: 1240.4533758163452
+BLEU:  0.0225214504426
+7  out of  37
+8  out of  37
+9  out of  37
+10  out of  37
+11  out of  37
+Loss:  0.0943831992653
+Perplexity:  1.09898079387
+time: 1252.8691430091858
+BLEU:  0.0523684068042
+12  out of  37
+13  out of  37
+14  out of  37
+15  out of  37
+16  out of  37
+Loss:  0.147160946308
+Perplexity:  1.15854041083
+time: 1264.9692268371582
+BLEU:  0.0488263967219
+17  out of  37
+18  out of  37
+19  out of  37
+20  out of  37
+21  out of  37
+Loss:  0.201189140127
+Perplexity:  1.2228560411
+time: 1278.1679198741913
+BLEU:  0.0612603991647
+22  out of  37
+23  out of  37
+24  out of  37
+25  out of  37
+26  out of  37
+Loss:  0.25646802626
+Perplexity:  1.29235744364
+time: 1292.4674990177155
+BLEU:  0.00162963193231
+27  out of  37
+28  out of  37
+29  out of  37
+30  out of  37
+31  out of  37
+Loss:  0.307298153198
+Perplexity:  1.35974632035
+time: 1306.6948609352112
+BLEU:  0.0377768815339
+32  out of  37
+33  out of  37
+34  out of  37
+35  out of  37
+36  out of  37
+Loss:  0.356749924807
+Perplexity:  1.42867854811
+time: 1320.1505289077759
+BLEU:  0.0728977370219
+37  out of  37
+38  out of  37
+
+
+('ITER', 11, 134377.52221679688)
+time: 1328.1728608608246
+
+
+[epoch=11 eta=0.1 clips=37 updates=37] 2  out of  36
+3  out of  36
+4  out of  36
+5  out of  36
+6  out of  36
+Loss:  0.0392142379244
+Perplexity:  1.03999326578
+time: 1337.679102897644
+BLEU:  0.0464923267891
+7  out of  36
+8  out of  36
+9  out of  36
+10  out of  36
+11  out of  36
+Loss:  0.0982122634966
+Perplexity:  1.1031969287
+time: 1351.8124480247498
+BLEU:  0.0199493722459
+12  out of  36
+13  out of  36
+14  out of  36
+15  out of  36
+16  out of  36
+Loss:  0.152974402021
+Perplexity:  1.16529514936
+time: 1365.3608989715576
+BLEU:  0.0352255484757
+17  out of  36
+18  out of  36
+19  out of  36
+20  out of  36
+21  out of  36
+Loss:  0.20830596583
+Perplexity:  1.23158993634
+time: 1379.1886298656464
+BLEU:  0.047387327125
+22  out of  36
+23  out of  36
+24  out of  36
+25  out of  36
+26  out of  36
+Loss:  0.256105201252
+Perplexity:  1.29188862909
+time: 1391.5048298835754
+BLEU:  0.0713320758243
+27  out of  36
+28  out of  36
+29  out of  36
+30  out of  36
+31  out of  36
+Loss:  0.301725861916
+Perplexity:  1.35219048899
+time: 1403.3987369537354
+BLEU:  0.0134958922381
+32  out of  36
+33  out of  36
+34  out of  36
+35  out of  36
+36  out of  36
+Loss:  0.350934543088
+Perplexity:  1.42039434824
+time: 1416.383505821228
+BLEU:  0.0544187725187
+37  out of  36
+
+
+('ITER', 12, 137585.61181640625)
+time: 1421.7387578487396
+
+
+[epoch=12 eta=0.1 clips=36 updates=36] 2  out of  35
+3  out of  35
+4  out of  35
+5  out of  35
+6  out of  35
+Loss:  0.0339699510488
+Perplexity:  1.03455351901
+time: 1430.6238260269165
+BLEU:  0.0496693146117
+7  out of  35
+8  out of  35
+9  out of  35
+10  out of  35
+11  out of  35
+Loss:  0.090374913803
+Perplexity:  1.09458458166
+time: 1444.8081889152527
+BLEU:  0.0224550041008
+12  out of  35
+13  out of  35
+14  out of  35
+15  out of  35
+16  out of  35
+Loss:  0.140779662601
+Perplexity:  1.15117097402
+time: 1458.0073108673096
+BLEU:  0.04344975767
+17  out of  35
+18  out of  35
+19  out of  35
+20  out of  35
+21  out of  35
+Loss:  0.187156058086
+Perplexity:  1.20581544762
+time: 1470.5786089897156
+BLEU:  0.000628150441984
+22  out of  35
+23  out of  35
+24  out of  35
+25  out of  35
+26  out of  35
+Loss:  0.237165626773
+Perplexity:  1.26765105734
+time: 1484.2116730213165
+BLEU:  0.0775280273
+27  out of  35
+28  out of  35
+29  out of  35
+30  out of  35
+31  out of  35
+Loss:  0.285798369657
+Perplexity:  1.33082409368
+time: 1497.8698580265045
+BLEU:  0.000802950535329
+32  out of  35
+33  out of  35
+34  out of  35
+35  out of  35
+36  out of  35
+Loss:  0.331747298616
+Perplexity:  1.39340068974
+time: 1510.911231994629
+BLEU:  0.0884319263885
+
+
+('ITER', 13, 134899.921875)
+time: 1513.6077899932861
+
+
+[epoch=13 eta=0.1 clips=35 updates=35] 2  out of  34
+3  out of  34
+4  out of  34
+5  out of  34
+6  out of  34
+Loss:  0.0359457373859
+Perplexity:  1.03659959636
+time: 1523.4835979938507
+BLEU:  0.0259775333021
+7  out of  34
+8  out of  34
+9  out of  34
+10  out of  34
+11  out of  34
+Loss:  0.0806999746132
+Perplexity:  1.08404560657
+time: 1535.8045518398285
+BLEU:  0.0176185292803
+12  out of  34
+13  out of  34
+14  out of  34
+15  out of  34
+16  out of  34
+Loss:  0.122528990966
+Perplexity:  1.13035188959
+time: 1548.4637229442596
+BLEU:  0.0263841835823
+17  out of  34
+18  out of  34
+19  out of  34
+20  out of  34
+21  out of  34
+Loss:  0.177411853658
+Perplexity:  1.19412279571
+time: 1564.6833028793335
+BLEU:  0.0394360224083
+22  out of  34
+23  out of  34
+24  out of  34
+25  out of  34
+26  out of  34
+Loss:  0.219966763586
+Perplexity:  1.24603531615
+time: 1577.3169050216675
+BLEU:  0.0218709329764
+27  out of  34
+28  out of  34
+29  out of  34
+30  out of  34
+31  out of  34
+Loss:  0.267992356062
+Perplexity:  1.30733714677
+time: 1591.673901796341
+BLEU:  0.063767296046
+32  out of  34
+33  out of  34
+34  out of  34
+35  out of  34
+
+
+('ITER', 14, 130706.85791015625)
+time: 1604.703796863556
+
+
+[epoch=14 eta=0.1 clips=34 updates=34] 2  out of  33
+3  out of  33
+4  out of  33
+5  out of  33
+6  out of  33
+Loss:  0.0330388658548
+Perplexity:  1.03359070985
+time: 1614.3672428131104
+BLEU:  0.0234001408577
+7  out of  33
+8  out of  33
+9  out of  33
+10  out of  33
+11  out of  33
+Loss:  0.0759320480164
+Perplexity:  1.078889259
+time: 1627.116271018982
+BLEU:  0.00512179190407
+12  out of  33
+13  out of  33
+14  out of  33
+15  out of  33
+16  out of  33
+Loss:  0.122126856424
+Perplexity:  1.12989742744
+time: 1640.6612470149994
+BLEU:  0.00549917575272
+17  out of  33
+18  out of  33
+19  out of  33
+20  out of  33
+21  out of  33
+Loss:  0.16800514486
+Perplexity:  1.18294269671
+time: 1654.5529208183289
+BLEU:  0.0158566933303
+22  out of  33
+23  out of  33
+24  out of  33
+25  out of  33
+26  out of  33
+Loss:  0.205455644259
+Perplexity:  1.22808450716
+time: 1667.0327048301697
+BLEU:  0.0558959195791
+27  out of  33
+28  out of  33
+29  out of  33
+30  out of  33
+31  out of  33
+Loss:  0.250796546452
+Perplexity:  1.28504861003
+time: 1681.2759668827057
+BLEU:  0.0313392602124
+32  out of  33
+33  out of  33
+34  out of  33
+
+
+('ITER', 15, 124225.17431640625)
+time: 1690.9920189380646
+
+
+[epoch=15 eta=0.1 clips=33 updates=33] 2  out of  32
+3  out of  32
+4  out of  32
+5  out of  32
+6  out of  32
+Loss:  0.0406020709252
+Perplexity:  1.04143760478
+time: 1702.887346982956
+BLEU:  0.0646340615132
+7  out of  32
+8  out of  32
+9  out of  32
+10  out of  32
+11  out of  32
+Loss:  0.0850175082088
+Perplexity:  1.08873612835
+time: 1716.5348110198975
+BLEU:  0.0619642138616
+12  out of  32
+13  out of  32
+14  out of  32
+15  out of  32
+16  out of  32
+Loss:  0.122567425759
+Perplexity:  1.13039533527
+time: 1728.601693868637
+BLEU:  0.0749410272466
+17  out of  32
+18  out of  32
+19  out of  32
+20  out of  32
+21  out of  32
+Loss:  0.156821269343
+Perplexity:  1.1697865185
+time: 1739.8806478977203
+BLEU:  0.00254692600622
+22  out of  32
+23  out of  32
+24  out of  32
+25  out of  32
+26  out of  32
+Loss:  0.195330844407
+Perplexity:  1.21571313185
+time: 1752.6540689468384
+BLEU:  0.0625076266113
+27  out of  32
+28  out of  32
+29  out of  32
+30  out of  32
+31  out of  32
+Loss:  0.229505118339
+Perplexity:  1.25797730596
+time: 1764.2124660015106
+BLEU:  0.00986296974101
+32  out of  32
+33  out of  32
+
+
+('ITER', 16, 118578.0029296875)
+time: 1772.7675948143005
+
+
+[epoch=16 eta=0.1 clips=32 updates=32] 2  out of  31
+3  out of  31
+4  out of  31
+5  out of  31
+6  out of  31
+Loss:  0.0271972079996
+Perplexity:  1.02757042789
+time: 1781.8900818824768
+BLEU:  0.018438775934
+7  out of  31
+8  out of  31
+9  out of  31
+10  out of  31
+11  out of  31
+Loss:  0.0734951231066
+Perplexity:  1.07626328784
+time: 1796.8000979423523
+BLEU:  0.0722403554159
+12  out of  31
+13  out of  31
+14  out of  31
+15  out of  31
+16  out of  31
+Loss:  0.115366318271
+Perplexity:  1.12228447559
+time: 1810.95201587677
+BLEU:  0.0202598029285
+17  out of  31
+18  out of  31
+19  out of  31
+20  out of  31
+21  out of  31
+Loss:  0.149733230628
+Perplexity:  1.16152434227
+time: 1822.9973638057709
+BLEU:  0.014082565921
+22  out of  31
+23  out of  31
+24  out of  31
+25  out of  31
+26  out of  31
+Loss:  0.185036984299
+Perplexity:  1.20326294114
+time: 1835.6727998256683
+BLEU:  0.00765708274679
+27  out of  31
+28  out of  31
+29  out of  31
+30  out of  31
+31  out of  31
+Loss:  0.219068976645
+Perplexity:  1.24491714393
+time: 1848.0287809371948
+BLEU:  0.0561899444054
+32  out of  31
+
+
+('ITER', 17, 113206.892578125)
+time: 1853.414615869522
+
+
+[epoch=17 eta=0.1 clips=31 updates=31] 2  out of  30
+3  out of  30
+4  out of  30
+5  out of  30
+6  out of  30
+Loss:  0.0377600558032
+Perplexity:  1.03848202525
+time: 1866.1495788097382
+BLEU:  0.0778150375676
+7  out of  30
+8  out of  30
+9  out of  30
+10  out of  30
+11  out of  30
+Loss:  0.0717543456005
+Perplexity:  1.07439138267
+time: 1878.2359998226166
+BLEU:  0.0567736259999
+12  out of  30
+13  out of  30
+14  out of  30
+15  out of  30
+16  out of  30
+Loss:  0.110743433006
+Perplexity:  1.11710825698
+time: 1891.744453907013
+BLEU:  0.0900416457026
+17  out of  30
+18  out of  30
+19  out of  30
+20  out of  30
+21  out of  30
+Loss:  0.143929514364
+Perplexity:  1.15480270865
+time: 1903.7601609230042
+BLEU:  0.0443200827073
+22  out of  30
+23  out of  30
+24  out of  30
+25  out of  30
+26  out of  30
+Loss:  0.182158896875
+Perplexity:  1.19980482397
+time: 1917.65518283844
+BLEU:  0.0370842254857
+27  out of  30
+28  out of  30
+29  out of  30
+30  out of  30
+31  out of  30
+Loss:  0.214786816152
+Perplexity:  1.23959760661
+time: 1930.0913569927216
+BLEU:  0.058408509155
+
+
+('ITER', 18, 112190.78295898438)
+time: 1932.8620839118958
+
+
+[epoch=18 eta=0.1 clips=30 updates=30] 2  out of  29
+3  out of  29
+4  out of  29
+5  out of  29
+6  out of  29
+Loss:  0.0291490603319
+Perplexity:  1.02957805228
+time: 1943.3602650165558
+BLEU:  0.052685829141
+7  out of  29
+8  out of  29
+9  out of  29
+10  out of  29
+11  out of  29
+Loss:  0.064512174205
+Perplexity:  1.06663856364
+time: 1956.5120379924774
+BLEU:  0.0473954432136
+12  out of  29
+13  out of  29
+14  out of  29
+15  out of  29
+16  out of  29
+Loss:  0.102045340992
+Perplexity:  1.10743368273
+time: 1970.6897399425507
+BLEU:  0.0667385736529
+17  out of  29
+18  out of  29
+19  out of  29
+20  out of  29
+21  out of  29
+Loss:  0.139504056697
+Perplexity:  1.14970346971
+time: 1984.7880928516388
+BLEU:  0.0516823109795
+22  out of  29
+23  out of  29
+24  out of  29
+25  out of  29
+26  out of  29
+Loss:  0.178919946799
+Perplexity:  1.19592500271
+time: 1999.3960859775543
+BLEU:  0.00161533996979
+27  out of  29
+28  out of  29
+29  out of  29
+30  out of  29
+
+
+('ITER', 19, 112037.419921875)
+time: 2012.4943499565125
+
+
+[epoch=19 eta=0.1 clips=29 updates=29] 

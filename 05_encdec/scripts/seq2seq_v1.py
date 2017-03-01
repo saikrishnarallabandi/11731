@@ -3,8 +3,8 @@ import cPickle, pickle
 import numpy as np
 import os
 from collections import defaultdict
-import _gdynet as dy
-from _gdynet import *
+import _dynet as dy
+from _dynet import *
 import numpy
 import random
 from nltk.tokenize import RegexpTokenizer 
@@ -18,9 +18,9 @@ class Attention_Batch:
        self.model = model
        #self.trainer = dy.SimpleSGDTrainer(self.model)
        self.layers = 1
-       self.embed_size = 128
+       self.embed_size = 256
        self.hidden_size = 128
-       self.state_size = 128
+       self.state_size = 512
        self.src_vocab_size = src_vocab_size
        self.tgt_vocab_size = tgt_vocab_size
        self.attention_size = 32
@@ -64,6 +64,19 @@ class Attention_Batch:
                out_vector = s.output()
                out_vectors.append(out_vector)
             out_vectors_array.append(out_vectors) 
+
+     def run_lstm_batch_advanced(self, init_state, input_vecs_batch):
+         out_vectors_array = []
+         for input_vecs in input_vecs_batch:
+            s = init_state
+            out_vectors = []
+            for vector in input_vecs:
+	       x_t = lookup(self.input_lookup, int(vector))
+               s = s.add_input(x_t)
+               out_vector = s.output()
+               out_vectors.append(out_vector)
+            out_vectors_array.append(out_vectors) 
+	              
 	  
      def embed_sentence(self, sentence):
           sentence = [EOS] + list(sentence) + [EOS]
@@ -171,12 +184,12 @@ class Attention_Batch:
               #out += int2char[next_word]
         return res
 
-     def get_loss(self, sentence):
+     def get_loss(self, src_sentence, tgt_sentence):
         dy.renew_cg()
         #embedded = self.embed_sentence(sentence)
-        encoded = self.encode_sentence(sentence)
+        encoded = self.encode_sentence(src_sentence)
         end_token = '</s>'
-        return self.decode(encoded, sentence, end_token)
+        return self.decode(encoded, tgt_sentence, end_token)
       
      def get_loss_batch(self, src_sentence_array, tgt_sentence_array):
         dy.renew_cg()
@@ -203,7 +216,7 @@ class Attention_Batch:
         sentence_rev_array = []
         for sent in sentence_array:
 	   sentence_rev_arrayy.append(list(reversed(sent)))
-	fwd_vectors = self.run_lstm_batch(self.enc_fwd_lstm.initial_state(), sentence_arry)
+	fwd_vectors = self.run_lstm_batch(self.enc_fwd_lstm.initial_state(), sentence_array)
         bwd_vectors = self.run_lstm_batch(self.enc_bwd_lstm.initial_state(), sentence_rev_array)
         bwd_vectors_array = []
         for v in bwd_vectors:
@@ -529,9 +542,7 @@ class RNNLanguageModel_batch:
         bias = parameter(self.bias)
         wids = []
         masks = []
-       
-
-        
+         
         # get the wids and masks for each step
         # "I am good", "This is good", "Good Morning" -> [['I', 'Today', 'Good'], ['am', 'is', 'Morning'], ['good', 'good', '<S>'], ['I', 'Today', 'Good'], ['am', 'is', 'Morning'], ['good', 'good', '<S>']]
 
